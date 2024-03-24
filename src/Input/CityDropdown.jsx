@@ -37,7 +37,7 @@ const CityDropdown = () => {
       <label htmlFor="city">Area Selector</label>
     
       <select id="city" name="city" value={selectedCity} onChange={handleCityChange}>
-        <option value="">Select a city...</option>
+        <option value="">Any City</option>
         {ontarioCities.map(city => (
           <option key={city} value={city}>{city}</option>
         ))}

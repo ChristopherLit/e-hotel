@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import 'air-datepicker/air-datepicker.css';
 import AirDatepicker from 'air-datepicker';
 
-const App = () => {
+const DatePicker = () => {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -19,4 +19,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default DatePicker;

@@ -1,8 +1,10 @@
-import App from "./Dates/App"
-import RoomCapacityDropdown from "./RoomCapacity/RoomCapacityDropdown"
-import ChainTypeDropdown from "./ChainType/ChainTypeDropdown"
-import PriceSlider from "./Price/PriceSlider"
-import CityDropdown from "./Area/CityDropdown"
+import DatePicker from "./DatePicker"
+import RoomCapacityDropdown from "./RoomCapacityDropdown"
+import ChainTypeDropdown from "./ChainTypeDropdown"
+import PriceSlider from "./PriceSlider"
+import CityDropdown from "./CityDropdown"
+import StarDropdown from "./StarDropdown"
+import NumberOfRoomsPicker from "./NumberOfRoomsPicker"
 
 function Input() {
  
@@ -10,11 +12,14 @@ function Input() {
     return (
       <div>
 
-        <App></App>
+        <DatePicker></DatePicker>
         <RoomCapacityDropdown></RoomCapacityDropdown>
         <ChainTypeDropdown></ChainTypeDropdown>
         <PriceSlider></PriceSlider>
         <CityDropdown></CityDropdown>
+        <StarDropdown></StarDropdown>
+        <NumberOfRoomsPicker></NumberOfRoomsPicker>
+        
         
         
   

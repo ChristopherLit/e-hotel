@@ -11,6 +11,7 @@ const RoomCapacityDropdown = () => {
     <div>
       <label htmlFor="capacity">Room Capacity:</label>
       <select id="capacity" value={capacity} onChange={handleChange}>
+        <option value={1}>Any Capacity</option>
         <option value={1}>1 Person</option>
         <option value={2}>2 People</option>
         <option value={3}>3 People</option>
