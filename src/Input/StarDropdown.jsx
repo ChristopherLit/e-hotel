@@ -1,19 +1,18 @@
+// StarDropdown.js
 import React, { useState } from 'react';
 
-const StarDropdown = ({ onFilterChange }) => {
+const StarDropdown = ({ onSelect }) => {
   const [selectedStars, setSelectedStars] = useState(""); 
-
 
   const handleStarChange = (event) => {
     const stars = event.target.value;
     setSelectedStars(stars);
-    onFilterChange(stars);
+    onSelect(stars); // Pass the selected value to the parent component
   };
 
   return (
     <div>
       <label htmlFor="stars">Filter by Stars:</label>
-   
       <select id="stars" name="stars" value={selectedStars} onChange={handleStarChange}>
         <option value="">All stars</option>
         <option value="1">1 Star and up</option>

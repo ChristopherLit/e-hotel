@@ -1,3 +1,5 @@
+// Input.js
+import React, { useState } from 'react';
 import DatePicker from "./DatePicker"
 import RoomCapacityDropdown from "./RoomCapacityDropdown"
 import ChainTypeDropdown from "./ChainTypeDropdown"
@@ -7,26 +9,40 @@ import StarDropdown from "./StarDropdown"
 import NumberOfRoomsPicker from "./NumberOfRoomsPicker"
 
 function Input() {
- 
+  const [selectedFilters, setSelectedFilters] = useState({
+    datePicker: "",
+    roomCapacity: "",
+    chainType: "",
+    priceSlider: "",
+    city: "",
+    star: "",
+    numberOfRooms: ""
+  });
 
-    return (
-      <div>
+  const handleSelect = (key, value) => {
+    setSelectedFilters(prevState => ({
+      ...prevState,
+      [key]: value
+    }));
+  };
 
-        <DatePicker></DatePicker>
-        <RoomCapacityDropdown></RoomCapacityDropdown>
-        <ChainTypeDropdown></ChainTypeDropdown>
-        <PriceSlider></PriceSlider>
-        <CityDropdown></CityDropdown>
-        <StarDropdown></StarDropdown>
-        <NumberOfRoomsPicker></NumberOfRoomsPicker>
-        
-        
-        
-  
-        
-      </div>
-    )
+  const applyFilter = () => {
+    const filtersArray = Object.values(selectedFilters);
+    console.log("Selected Filters:", filtersArray);
   }
-  
-  export default Input
-  
+
+  return (
+    <div>
+      <DatePicker onSelect={(value) => handleSelect("datePicker", value)} />
+      <RoomCapacityDropdown onSelect={(value) => handleSelect("roomCapacity", value)} />
+      <ChainTypeDropdown onSelect={(value) => handleSelect("chainType", value)} />
+      <PriceSlider onSelect={(value) => handleSelect("priceSlider", value)} />
+      <CityDropdown onSelect={(value) => handleSelect("city", value)} />
+      <StarDropdown onSelect={(value) => handleSelect("star", value)} />
+      <NumberOfRoomsPicker onSelect={(value) => handleSelect("numberOfRooms", value)} />
+      <button onClick={applyFilter}>Filter</button>
+    </div>
+  )
+}
+
+export default Input;

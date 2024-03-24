@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 
-const CityDropdown = () => {
+const CityDropdown = ({onSelect}) => {
   const [selectedCity, setSelectedCity] = useState(""); 
 
 
   const handleCityChange = (event) => {
-    setSelectedCity(event.target.value);
+    const city = event.target.value;
+    setSelectedCity(city);
+    onSelect(city);
   };
 
  

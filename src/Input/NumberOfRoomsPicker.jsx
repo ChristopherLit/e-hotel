@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-const NumberOfRoomsPicker = () => {
-  const [number, setNumber] = useState(50);
+const NumberOfRoomsPicker = ({onSelect}) => {
+  const [number, setNumber] = useState(-1);
 
 
   const handleSliderChange = (event) => {
     setNumber(event.target.value);
+    onSelect(number);
   };
 
   return (
