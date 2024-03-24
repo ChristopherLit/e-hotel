@@ -1,6 +1,6 @@
 // Input.js
 import React, { useState } from 'react';
-import DatePicker from "./DatePicker"
+import DateRangePicker from "./DateRangePicker"
 import RoomCapacityDropdown from "./RoomCapacityDropdown"
 import ChainTypeDropdown from "./ChainTypeDropdown"
 import PriceSlider from "./PriceSlider"
@@ -29,21 +29,12 @@ function Input() {
   const applyFilter = () => {
     const filtersArray = Object.values(selectedFilters);
     console.log("Selected Filters:", filtersArray);
-
-    // Get the input element by its id
-const inputElement = document.getElementById('input');
-
-// Extract the text from the input element
-const text = inputElement.value;
-
-// Now you can use the 'text' variable which contains the text from the input element
-console.log(text);
-
+    
   }
 
   return (
     <div>
-      <DatePicker onSelect={(value) => handleSelect("datePicker", value)} />
+      <DateRangePicker onSelect={(value) => handleSelect("datePicker", value)} />
       <RoomCapacityDropdown onSelect={(value) => handleSelect("roomCapacity", value)} />
       <ChainTypeDropdown onSelect={(value) => handleSelect("chainType", value)} />
       <PriceSlider onSelect={(value) => handleSelect("priceSlider", value)} />
