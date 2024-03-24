@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const RoomCapacityDropdown = ({ onSelect }) => {
-  const [capacity, setCapacity] = useState(-1);
+  const [capacity, setCapacity] = useState(0);
 
   const handleChange = (e) => {
     const value = parseInt(e.target.value);

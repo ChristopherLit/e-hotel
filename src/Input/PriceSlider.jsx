@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const PriceSlider = ({onSelect}) => {
-  const [price, setPrice] = useState(-1);
+  const [price, setPrice] = useState(0);
 
 
   const handleSliderChange = (event) => {
