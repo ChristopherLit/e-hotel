@@ -8,8 +8,8 @@ const ChainTypeDropdown = ({onSelect}) => {
     fetch('http://localhost:3000/api/ids')
       .then(response => response.json())
       .then(data => {
-        const ids = data.map(item => item.chain_id);
-        setChainIds(ids);
+        const ids_names = data.map(item => [item.chain_id, item.name]);
+        setChainIds(ids_names);
       });
   }, []);
 
@@ -21,11 +21,11 @@ const ChainTypeDropdown = ({onSelect}) => {
 
   return (
     <div>
-      <label htmlFor="Chain Type">Company:</label>
+      <label htmlFor="Chain Type">Hotel Chain:</label>
       <select id="type" value={type} onChange={handleChange}>
-        <option value={0}>Any Company</option>
-        {chainIds.map(id => (
-          <option key={id} value={id}>Hotel Chain {id}</option>
+        <option value={0}>Any Hotel Chain</option>
+        {chainIds.map(chain => (
+          <option key={chain[0]} value={chain[0]}>{chain[1]}</option>
         ))}
       </select>
     </div>

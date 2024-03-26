@@ -4,7 +4,7 @@
 npm i
 ```
 ```bash
-npm install express pg
+npm install express pg cors
 ```
 
 ## create database and populate with data
