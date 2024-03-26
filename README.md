@@ -8,7 +8,7 @@ npm install express pg cors
 ```
 
 ## create database and populate with data
-open psql shell login to local and run the following
+open psql shell, login to local, and run the following
 ```bash
 CREATE DATABASE ehotels
 \c ehotels
