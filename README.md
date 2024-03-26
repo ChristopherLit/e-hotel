@@ -7,6 +7,15 @@ npm i
 npm install express pg
 ```
 
+## create database and populate with data
+open psql shell login to local and run the following
+```bash
+CREATE DATABASE ehotels;
+\c ehotels
+```
+after creating the local databse, create schema tables using queries from <db_init_queries/init_db.sql>
+then, populate with sample data from <db_init_queries/sample_data.sql>
+
 ## to run
 frontend
 ```bash
