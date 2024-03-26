@@ -13,7 +13,7 @@ open psql shell login to local and run the following
 CREATE DATABASE ehotels;
 \c ehotels
 ```
-after creating the local databse, create schema tables using queries from <db_init_queries/init_db.sql>
+after creating the local databse, create schema tables using queries from <db_init_queries/init_db.sql><br>
 then, populate with sample data from <db_init_queries/sample_data.sql>
 
 ## to run
