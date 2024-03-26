@@ -2,7 +2,7 @@ CREATE TABLE hotel_chain (
     chain_id SERIAL PRIMARY KEY,
     office_address VARCHAR(255),
     email VARCHAR(255),
-    phone_number INT,
+    phone_number BIGINT,
     name VARCHAR(255)
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE hotel (
     name VARCHAR(255),
     email VARCHAR(255),
     address VARCHAR(255),
-    phone_number INT,
+    phone_number BIGINT,
     chain_id INT,
     manager_id INT,
     FOREIGN KEY (chain_id) REFERENCES hotel_chain(chain_id),
