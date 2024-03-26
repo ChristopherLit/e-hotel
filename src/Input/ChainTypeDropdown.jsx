@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ChainTypeDropdown = ({onSelect}) => {
   const [type, setType] = useState("");
+  const [chainIds, setChainIds] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/ids')
+      .then(response => response.json())
+      .then(data => {
+        const ids = data.map(item => item.chain_id);
+        setChainIds(ids);
+      });
+  }, []);
 
   const handleChange = (e) => {
     const selectedType = parseInt(e.target.value);
@@ -14,11 +24,9 @@ const ChainTypeDropdown = ({onSelect}) => {
       <label htmlFor="Chain Type">Company:</label>
       <select id="type" value={type} onChange={handleChange}>
         <option value={0}>Any Company</option>
-        <option value={1}>Hotel Chain 1</option>
-        <option value={2}>Hotel Chain 2</option>
-        <option value={3}>Hotel Chain 3</option>
-        <option value={4}>Hotel Chain 4</option>
-        <option value={5}>Hotel Chain 5</option>
+        {chainIds.map(id => (
+          <option key={id} value={id}>Hotel Chain {id}</option>
+        ))}
       </select>
     </div>
   );
