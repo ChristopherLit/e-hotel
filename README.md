@@ -14,7 +14,8 @@ CREATE DATABASE ehotels
 \c ehotels
 ```
 after creating the local databse, create schema tables using queries from <db_init_queries/init_db.sql><br><br>
-then, populate with sample data from <db_init_queries/sample_data.sql>
+then, populate with sample data from <db_init_queries/sample_data.sql><br><br>
+ENSURE the fields in <db.js> matches your local system 
 
 ## to run
 frontend
