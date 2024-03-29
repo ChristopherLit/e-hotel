@@ -7,6 +7,19 @@ VALUES
 ('101 Maple St, Houston, TX', 'chain4@example.com', 4567890123, 'Urban Retreat Hotels'),
 ('202 Oak St, Miami, FL', 'chain5@example.com', 5678901234, 'Golden Gate Hotels');
 
+INSERT INTO manager (first_name, last_name)
+VALUES
+('John', 'Doe'),
+('Jane', 'Smith'),
+('Emily', 'Johnson'),
+('Michael', 'Williams'),
+('Sarah', 'Brown'),
+('David', 'Jones'),
+('Emma', 'Garcia'),
+('Daniel', 'Miller'),
+('Olivia', 'Martinez'),
+('James', 'Davis');
+
 -- Hotels for Chain 1
 INSERT INTO hotel (rating, number_of_rooms, name, email, address, phone_number, chain_id, manager_id)
 VALUES
