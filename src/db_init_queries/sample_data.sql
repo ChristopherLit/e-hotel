@@ -80,8 +80,6 @@ VALUES
 (2, 100, 'Hotel 5G', 'hotel5g@chain5.com', 'City St, New York, NY', 2223334444, 5, 11),
 (4, 180, 'Hotel 5H', 'hotel5h@chain5.com', 'City St, San Francisco, CA', 3334445555, 5, 12);
 
--- Additional hotels for Chain 2...
-
 -- Rooms (sample for 1 hotel, replicate similar data for the rest): 
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
 VALUES
@@ -90,6 +88,38 @@ VALUES
 (150, 2, FALSE, TRUE, FALSE, 1),
 (300, 4, FALSE, TRUE, TRUE, 1),
 (100, 1, FALSE, FALSE, FALSE, 1);
+
+INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
+VALUES
+(200, 2, TRUE, FALSE, FALSE, 2),
+(250, 3, TRUE, FALSE, TRUE, 2),
+(150, 2, FALSE, TRUE, FALSE, 2),
+(300, 4, FALSE, TRUE, TRUE, 2),
+(100, 1, FALSE, FALSE, FALSE, 2);
+
+INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
+VALUES
+(230, 2, TRUE, FALSE, FALSE, 3),
+(280, 3, TRUE, FALSE, TRUE, 3),
+(180, 2, FALSE, TRUE, FALSE, 3),
+(330, 4, FALSE, TRUE, TRUE, 3),
+(130, 1, FALSE, FALSE, FALSE, 3);
+
+INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
+VALUES
+(260, 2, TRUE, FALSE, FALSE, 4),
+(310, 3, TRUE, FALSE, TRUE, 4),
+(210, 2, FALSE, TRUE, FALSE, 4),
+(360, 4, FALSE, TRUE, TRUE, 4),
+(160, 1, FALSE, FALSE, FALSE, 4);
+
+INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
+VALUES
+(260, 2, TRUE, FALSE, FALSE, 5),
+(310, 3, TRUE, FALSE, TRUE, 5),
+(210, 2, FALSE, TRUE, FALSE, 5),
+(360, 4, FALSE, TRUE, TRUE, 5),
+(160, 1, FALSE, FALSE, FALSE, 5);
 
 -- ammenities
 INSERT INTO amenities (amenity)
