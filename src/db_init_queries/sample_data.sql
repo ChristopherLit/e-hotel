@@ -80,44 +80,48 @@ VALUES
 (2, 100, 'Hotel 5G', 'hotel5g@chain5.com', 'City St, New York, NY', 2223334444, 5, 11),
 (4, 180, 'Hotel 5H', 'hotel5h@chain5.com', 'City St, San Francisco, CA', 3334445555, 5, 12);
 
--- Rooms (sample for 1 hotel, replicate similar data for the rest): 
+-- Rooms for hotel chain 1
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
 VALUES
-(200, 2, TRUE, FALSE, FALSE, 1),
+(200, 5, TRUE, FALSE, FALSE, 1),
 (250, 3, TRUE, FALSE, TRUE, 1),
 (150, 2, FALSE, TRUE, FALSE, 1),
 (300, 4, FALSE, TRUE, TRUE, 1),
 (100, 1, FALSE, FALSE, FALSE, 1);
 
+-- Rooms for hotel chain 2
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
 VALUES
 (200, 2, TRUE, FALSE, FALSE, 2),
 (250, 3, TRUE, FALSE, TRUE, 2),
-(150, 2, FALSE, TRUE, FALSE, 2),
+(150, 5, FALSE, TRUE, FALSE, 2),
 (300, 4, FALSE, TRUE, TRUE, 2),
 (100, 1, FALSE, FALSE, FALSE, 2);
 
+-- Rooms for hotel chain 3
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
 VALUES
 (230, 2, TRUE, FALSE, FALSE, 3),
 (280, 3, TRUE, FALSE, TRUE, 3),
-(180, 2, FALSE, TRUE, FALSE, 3),
+(180, 5, FALSE, TRUE, FALSE, 3),
 (330, 4, FALSE, TRUE, TRUE, 3),
 (130, 1, FALSE, FALSE, FALSE, 3);
 
+-- Rooms for hotel chain 4
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
 VALUES
 (260, 2, TRUE, FALSE, FALSE, 4),
 (310, 3, TRUE, FALSE, TRUE, 4),
-(210, 2, FALSE, TRUE, FALSE, 4),
+(210, 5, FALSE, TRUE, FALSE, 4),
 (360, 4, FALSE, TRUE, TRUE, 4),
 (160, 1, FALSE, FALSE, FALSE, 4);
 
+-- Rooms for hotel chain 5
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
 VALUES
 (260, 2, TRUE, FALSE, FALSE, 5),
 (310, 3, TRUE, FALSE, TRUE, 5),
-(210, 2, FALSE, TRUE, FALSE, 5),
+(210, 5, FALSE, TRUE, FALSE, 5),
 (360, 4, FALSE, TRUE, TRUE, 5),
 (160, 1, FALSE, FALSE, FALSE, 5);
 
@@ -152,5 +156,21 @@ INSERT INTO room_problems (room_number, problem_id)
 VALUES
 (1, 1),
 (1, 2);
+
+-- Populate the 'roles' table
+INSERT INTO roles (role)
+VALUES
+('Manager'),
+('Front Desk Staff'),
+('Housekeeping'),
+('Maintenance');
+
+-- Populate the 'employee' table
+INSERT INTO employee (first_name, last_name, address)
+VALUES
+('Crundee', 'Yasuo', '123 Main St'),
+('Dotroy', 'Hum', '456 Elm St'),
+('August', 'Lin', '789 Oak St');
+
 
 
