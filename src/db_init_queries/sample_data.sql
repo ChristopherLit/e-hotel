@@ -172,5 +172,39 @@ VALUES
 ('Dotroy', 'Hum', '456 Elm St'),
 ('August', 'Lin', '789 Oak St');
 
+-- Populate the 'works_for' table
+INSERT INTO works_for (hotel_id, employee_ssn_sin)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
+-- Populate the 'customer' table
+INSERT INTO customer (first_name, last_name, registration_date)
+VALUES
+('Alice', 'Johnson', '2024-03-29'),
+('Bob', 'Williams', '2024-03-30'),
+('Charlie', 'Brown', '2024-04-01');
+
+-- Populate the 'booking_renting' table
+INSERT INTO booking_renting (renting_status, start_date, end_date, checkin_date, checkout_date, payment, employee_ssn_sin)
+VALUES
+('Booked', '2024-04-01', '2024-04-05', '2024-04-01', '2024-04-05', 500.00, 1),
+('Checked In', '2024-04-02', '2024-04-06', '2024-04-02', '2024-04-06', 600.00, 1),
+('Checked Out', '2024-04-03', '2024-04-07', '2024-04-03', '2024-04-07', 700.00, 1);
+
+-- Populate the 'book' table
+INSERT INTO book (booking_renting_id, customer_ssn_sin)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
+-- Populate the 'reserve' table
+INSERT INTO reserve (booking_renting_id, room_number)
+VALUES
+(1, 101),
+(2, 102),
+(3, 103);
 
 
