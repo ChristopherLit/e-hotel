@@ -39,6 +39,47 @@ VALUES
 (4, 90, 'Hotel 2B', 'hotel2b@chain2.com', 'Mountain Rd, Seattle, WA', 6667778888, 2, 6),
 (3, 70, 'Hotel 2C', 'hotel2c@chain2.com', 'City St, Chicago, IL', 7778889999, 2, 7),
 (3, 70, 'Hotel 2D', 'hotel2d@chain2.com', 'City St, Chicago, IL', 8889990000, 2, 8),
+(5, 110, 'Hotel 2E', 'hotel2e@chain2.com', 'Ocean Ave, Miami, FL', 9990001111, 2, 9),
+(4, 80, 'Hotel 2F', 'hotel2f@chain2.com', 'Forest Rd, Portland, OR', 1112223333, 2, 10),
+(3, 60, 'Hotel 2G', 'hotel2g@chain2.com', 'Downtown, Dallas, TX', 2223334444, 2, 11),
+(2, 50, 'Hotel 2H', 'hotel2h@chain2.com', 'Bay St, San Francisco, CA', 3334445555, 2, 12);
+
+-- Hotels for Chain 3
+INSERT INTO hotel (rating, number_of_rooms, name, email, address, phone_number, chain_id, manager_id)
+VALUES
+(4, 150, 'Hotel 3A', 'hotel3a@chain3.com', 'Beach Blvd, San Francisco, CA', 9990001111, 3, 9),
+(3, 100, 'Hotel 3B', 'hotel3b@chain3.com', 'Mountain Rd, Portland, OR', 1234567890, 3, 10),
+(2, 80, 'Hotel 3C', 'hotel3c@chain3.com', 'City St, Dallas, TX', 2345678901, 3, 11),
+(5, 200, 'Hotel 3D', 'hotel3d@chain3.com', 'City St, Atlanta, GA', 3456789012, 3, 12),
+(4, 130, 'Hotel 3E', 'hotel3e@chain3.com', 'Beach Blvd, Miami, FL', 4567890123, 3, 13),
+(3, 90, 'Hotel 3F', 'hotel3f@chain3.com', 'Mountain Rd, Seattle, WA', 5678901234, 3, 14),
+(2, 70, 'Hotel 3G', 'hotel3g@chain3.com', 'City St, Chicago, IL', 6789012345, 3, 15),
+(4, 150, 'Hotel 3H', 'hotel3h@chain3.com', 'City St, Houston, TX', 7890123456, 3, 16);
+
+-- Hotels for Chain 4
+INSERT INTO hotel (rating, number_of_rooms, name, email, address, phone_number, chain_id, manager_id)
+VALUES
+(5, 130, 'Hotel 4A', 'hotel4a@chain4.com', 'Beach Blvd, Miami, FL', 1112223333, 4, 1),
+(4, 100, 'Hotel 4B', 'hotel4b@chain4.com', 'Mountain Rd, Denver, CO', 2223334444, 4, 2),
+(3, 70, 'Hotel 4C', 'hotel4c@chain4.com', 'City St, New York, NY', 3334445555, 4, 3),
+(3, 70, 'Hotel 4D', 'hotel4d@chain4.com', 'City St, New York, NY', 4445556666, 4, 4),
+(5, 140, 'Hotel 4E', 'hotel4e@chain4.com', 'Beach Blvd, Los Angeles, CA', 5556667777, 4, 5),
+(4, 110, 'Hotel 4F', 'hotel4f@chain4.com', 'Mountain Rd, Seattle, WA', 6667778888, 4, 6),
+(3, 80, 'Hotel 4G', 'hotel4g@chain4.com', 'City St, Chicago, IL', 7778889999, 4, 7),
+(2, 60, 'Hotel 4H', 'hotel4h@chain4.com', 'City St, Houston, TX', 8889990000, 4, 8);
+
+-- Hotels for Chain 5
+INSERT INTO hotel (rating, number_of_rooms, name, email, address, phone_number, chain_id, manager_id)
+VALUES
+(4, 180, 'Hotel 5A', 'hotel5a@chain5.com', 'Beach Blvd, Los Angeles, CA', 5556667777, 5, 5),
+(3, 120, 'Hotel 5B', 'hotel5b@chain5.com', 'Mountain Rd, Seattle, WA', 6667778888, 5, 6),
+(2, 90, 'Hotel 5C', 'hotel5c@chain5.com', 'City St, Chicago, IL', 7778889999, 5, 7),
+(5, 220, 'Hotel 5D', 'hotel5d@chain5.com', 'City St, Houston, TX', 8889990000, 5, 8),
+(4, 200, 'Hotel 5E', 'hotel5e@chain5.com', 'Beach Blvd, Miami, FL', 9990001111, 5, 9),
+(3, 150, 'Hotel 5F', 'hotel5f@chain5.com', 'Mountain Rd, Denver, CO', 1112223333, 5, 10),
+(2, 100, 'Hotel 5G', 'hotel5g@chain5.com', 'City St, New York, NY', 2223334444, 5, 11),
+(4, 180, 'Hotel 5H', 'hotel5h@chain5.com', 'City St, San Francisco, CA', 3334445555, 5, 12);
+
 -- Additional hotels for Chain 2...
 
 -- Rooms (sample for 1 hotel, replicate similar data for the rest): 
