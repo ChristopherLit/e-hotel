@@ -49,12 +49,12 @@ INSERT INTO hotel (rating, number_of_rooms, name, email, address, phone_number, 
 VALUES
 (4, 150, 'Hotel 3A', 'hotel3a@chain3.com', 'Beach Blvd, San Francisco, CA', 9990001111, 3, 9),
 (3, 100, 'Hotel 3B', 'hotel3b@chain3.com', 'Mountain Rd, Portland, OR', 1234567890, 3, 10),
-(2, 80, 'Hotel 3C', 'hotel3c@chain3.com', 'City St, Dallas, TX', 2345678901, 3, 11),
-(5, 200, 'Hotel 3D', 'hotel3d@chain3.com', 'City St, Atlanta, GA', 3456789012, 3, 12),
-(4, 130, 'Hotel 3E', 'hotel3e@chain3.com', 'Beach Blvd, Miami, FL', 4567890123, 3, 13),
-(3, 90, 'Hotel 3F', 'hotel3f@chain3.com', 'Mountain Rd, Seattle, WA', 5678901234, 3, 14),
-(2, 70, 'Hotel 3G', 'hotel3g@chain3.com', 'City St, Chicago, IL', 6789012345, 3, 15),
-(4, 150, 'Hotel 3H', 'hotel3h@chain3.com', 'City St, Houston, TX', 7890123456, 3, 16);
+(2, 80, 'Hotel 3C', 'hotel3c@chain3.com', 'City St, Dallas, TX', 2345678901, 3, 1),
+(5, 200, 'Hotel 3D', 'hotel3d@chain3.com', 'City St, Atlanta, GA', 3456789012, 3, 2),
+(4, 130, 'Hotel 3E', 'hotel3e@chain3.com', 'Beach Blvd, Miami, FL', 4567890123, 3, 3),
+(3, 90, 'Hotel 3F', 'hotel3f@chain3.com', 'Mountain Rd, Seattle, WA', 5678901234, 3, 4),
+(2, 70, 'Hotel 3G', 'hotel3g@chain3.com', 'City St, Chicago, IL', 6789012345, 3, 5),
+(4, 150, 'Hotel 3H', 'hotel3h@chain3.com', 'City St, Houston, TX', 7890123456, 3, 6);
 
 -- Hotels for Chain 4
 INSERT INTO hotel (rating, number_of_rooms, name, email, address, phone_number, chain_id, manager_id)
@@ -77,8 +77,8 @@ VALUES
 (5, 220, 'Hotel 5D', 'hotel5d@chain5.com', 'City St, Houston, TX', 8889990000, 5, 8),
 (4, 200, 'Hotel 5E', 'hotel5e@chain5.com', 'Beach Blvd, Miami, FL', 9990001111, 5, 9),
 (3, 150, 'Hotel 5F', 'hotel5f@chain5.com', 'Mountain Rd, Denver, CO', 1112223333, 5, 10),
-(2, 100, 'Hotel 5G', 'hotel5g@chain5.com', 'City St, New York, NY', 2223334444, 5, 11),
-(4, 180, 'Hotel 5H', 'hotel5h@chain5.com', 'City St, San Francisco, CA', 3334445555, 5, 12);
+(2, 100, 'Hotel 5G', 'hotel5g@chain5.com', 'City St, New York, NY', 2223334444, 5, 9),
+(4, 180, 'Hotel 5H', 'hotel5h@chain5.com', 'City St, San Francisco, CA', 3334445555, 5, 2);
 
 -- Rooms for hotel chain 1
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
@@ -168,7 +168,7 @@ VALUES
 -- Populate the 'employee' table
 INSERT INTO employee (first_name, last_name, address)
 VALUES
-('Crundee', 'Yasuo', '123 Main St'),
+('Crundee', 'Yasuo', '45 Mann Ave'),
 ('Dotroy', 'Hum', '456 Elm St'),
 ('August', 'Lin', '789 Oak St');
 
@@ -203,8 +203,6 @@ VALUES
 -- Populate the 'reserve' table
 INSERT INTO reserve (booking_renting_id, room_number)
 VALUES
-(1, 101),
-(2, 102),
-(3, 103);
-
-
+(1, 1),
+(2, 3),
+(3, 2);
