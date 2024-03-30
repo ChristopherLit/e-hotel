@@ -9,15 +9,42 @@ function SignIn() {
     setRole(role);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    console.log('Submitted SSN:', event.target.ssn.value);
+
+    const ssn = event.target.ssn.value; // Extract SSN from the form
+
+    console.log('Submitted SSN:', ssn);
     console.log('Role:', role);
 
-    
-  };
+    let ssnFinderRoute = '';
 
+    if (role === "customer") {
+      ssnFinderRoute = '/ssnCustomer';
+    } else {
+      ssnFinderRoute = '/ssnEmployee';
+    }
+
+    try {
+      const response = await fetch(ssnFinderRoute, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ssn }), // Include SSN in the request body
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log("Success");
+      } else {
+        console.log("Failed");
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <div>

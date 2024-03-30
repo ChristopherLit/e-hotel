@@ -59,7 +59,7 @@ const get_hotel_by_filters = (req, res) => {
 };
 
 const get_customer_ssn = (req, res) => {
-    pool.query('SELECT customer_ssn_sin FROM customer', (error, results) => {
+    pool.query(customer_query, (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
@@ -68,7 +68,7 @@ const get_customer_ssn = (req, res) => {
 };
 
 const get_employee_ssn = (req, res) => {
-    pool.query('SELECT employee_ssn_sin FROM employee', (error, results) => {
+    pool.query(employee_query, (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
