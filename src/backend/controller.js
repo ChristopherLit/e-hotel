@@ -58,6 +58,24 @@ const get_hotel_by_filters = (req, res) => {
     });
 };
 
+const get_customer_ssn = (req, res) => {
+    pool.query(customer_query, (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+        res.status(200).json(results.rows);
+    });
+};
+
+const get_employee_ssn = (req, res) => {
+    pool.query(employee_query, (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+        res.status(200).json(results.rows);
+    });
+};
 
 
-export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids};
+
+export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, get_customer_ssn, get_employee_ssn};
