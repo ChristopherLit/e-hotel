@@ -5,6 +5,7 @@ npm i
 ```
 ```bash
 npm install express pg cors
+npm install react-router-dom
 ```
 
 ## create database and populate with data

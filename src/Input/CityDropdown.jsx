@@ -1,8 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const CityDropdown = ({onSelect}) => {
   const [selectedCity, setSelectedCity] = useState(""); 
+  const [cities, setCities] = useState([]);
 
+  useEffect(() => {
+    fetch('http://localhost:3000/api/ids')
+      .then(response => response.json())
+      .then(data => {
+        const addresses = data.map(item => {
+          let parts = item.office_address.split(",");
+          return parts[1];
+        });
+        setCities(addresses);
+      });
+  }, []);
 
   const handleCityChange = (event) => {
     const city = event.target.value;
@@ -10,38 +22,14 @@ const CityDropdown = ({onSelect}) => {
     onSelect(city);
   };
 
- 
-  const ontarioCities = [
-    "Barrie",
-    "Brampton",
-    "Burlington",
-    "Cambridge",
-    "Guelph",
-    "Hamilton",
-    "Kingston",
-    "Kitchener",
-    "London",
-    "Markham",
-    "Mississauga",
-    "Oakville",
-    "Ottawa",
-    "Richmond Hill",
-    "Sudbury",
-    "Thunder Bay",
-    "Toronto",
-    "Vaughan",
-    "Waterloo",
-    "Windsor"
-  ];
-
   return (
     <div>
       <label htmlFor="city">Area Selector</label>
     
       <select id="city" name="city" value={selectedCity} onChange={handleCityChange}>
         <option value="">Any City</option>
-        {ontarioCities.map(city => (
-          <option key={city} value={city}>{city}</option>
+        {cities.map((city, index) => (
+          <option key={index} value={city}>{city}</option>
         ))}
       </select>
   

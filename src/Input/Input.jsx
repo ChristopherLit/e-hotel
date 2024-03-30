@@ -1,12 +1,13 @@
 // Input.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DateRangePicker from "./DateRangePicker"
 import RoomCapacityDropdown from "./RoomCapacityDropdown"
 import ChainTypeDropdown from "./ChainTypeDropdown"
 import PriceSlider from "./PriceSlider"
 import CityDropdown from "./CityDropdown"
 import StarDropdown from "./StarDropdown"
-import NumberOfRoomsPicker from "./NumberOfRoomsPicker"
+// import NumberOfRoomsPicker from "./NumberOfRoomsPicker"
 
 function Input() {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -16,8 +17,10 @@ function Input() {
     priceSlider: "",
     city: "",
     star: "",
-    numberOfRooms: ""
+    // numberOfRooms: ""
   });
+
+  const navigate = useNavigate();
 
   const handleSelect = (key, value) => {
     setSelectedFilters(prevState => ({
@@ -27,9 +30,7 @@ function Input() {
   };
 
   const applyFilter = () => {
-    const filtersArray = Object.values(selectedFilters);
-    console.log("Selected Filters:", filtersArray);
-    
+    navigate('/hotels', { state: { filters: selectedFilters } });
   }
 
   return (
@@ -40,7 +41,7 @@ function Input() {
       <PriceSlider onSelect={(value) => handleSelect("priceSlider", value)} />
       <CityDropdown onSelect={(value) => handleSelect("city", value)} />
       <StarDropdown onSelect={(value) => handleSelect("star", value)} />
-      <NumberOfRoomsPicker onSelect={(value) => handleSelect("numberOfRooms", value)} />
+      {/* <NumberOfRoomsPicker onSelect={(value) => handleSelect("numberOfRooms", value)} /> */}
       <button onClick={applyFilter}>Filter</button>
     </div>
   )

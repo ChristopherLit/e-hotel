@@ -1,18 +1,19 @@
-import Input from "./Input/Input"
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Input from './Input/Input';
+import ChooseHotel from './routes/choose_hotel';
 
 function App() {
- 
-
   return (
-    <div>
-
-      <Input></Input>
-
-
-
-
-    </div>
-  )
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<Input />} />
+          <Route path="/hotels" element={<ChooseHotel />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

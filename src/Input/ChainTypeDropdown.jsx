@@ -8,7 +8,7 @@ const ChainTypeDropdown = ({onSelect}) => {
     fetch('http://localhost:3000/api/ids')
       .then(response => response.json())
       .then(data => {
-        const ids_names = data.map(item => [item.chain_id, item.name]);
+        const ids_names = data.map(item => [item.chain_id, item.name, item.office_address]);
         setChainIds(ids_names);
       });
   }, []);

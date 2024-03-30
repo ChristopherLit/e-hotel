@@ -6,12 +6,12 @@ const PriceSlider = ({onSelect}) => {
 
   const handleSliderChange = (event) => {
     setPrice(event.target.value);
-    onSelect(price);
+    onSelect(event.target.value);
   };
 
   return (
     <div>
-      <label htmlFor="price">Price:</label>
+      <label htmlFor="price">Max Price:</label>
       {/* Slider input element */}
       <input
         type="range"
@@ -23,7 +23,7 @@ const PriceSlider = ({onSelect}) => {
         onChange={handleSliderChange}
       />
       {/* Display the current price */}
-      <p>Price: ${price}</p>
+      <p>Max Price: ${price}</p>
     </div>
   );
 };
