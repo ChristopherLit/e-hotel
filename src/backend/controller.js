@@ -1,5 +1,5 @@
 import pool from '../../db.js'; 
-import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query } from './queries.js';
+import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_query, employee_query} from './queries.js';
 
 const get_hotel_chain = (req, res) => {
     pool.query(hotel_chain_query, (error, results) => {
@@ -61,7 +61,7 @@ const get_hotel_by_filters = (req, res) => {
 const get_customer_ssn = (req, res) => {
     pool.query(customer_query, (error, results) => {
         if (error) {
-            return res.status(500).json({ error: error.message });
+            return res.status(500).json({ error: "custoemr" });
         }
         res.status(200).json(results.rows);
     });
@@ -70,7 +70,7 @@ const get_customer_ssn = (req, res) => {
 const get_employee_ssn = (req, res) => {
     pool.query(employee_query, (error, results) => {
         if (error) {
-            return res.status(500).json({ error: error.message });
+            return res.status(500).json({ error: "asd" });
         }
         res.status(200).json(results.rows);
     });
