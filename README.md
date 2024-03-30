@@ -1,11 +1,8 @@
 # how to run
 ## install dependencies
 ```bash
-npm i
-```
-```bash
-npm install express pg cors
-npm install react-router-dom
+npm install
+npm install express pg cors react-router-dom
 ```
 
 ## create database and populate with data

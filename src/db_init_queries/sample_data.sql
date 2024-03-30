@@ -41,8 +41,8 @@ VALUES
 (3, 70, 'Hotel 2D', 'hotel2d@chain2.com', 'City St, Chicago, IL', 8889990000, 2, 8),
 (5, 110, 'Hotel 2E', 'hotel2e@chain2.com', 'Ocean Ave, Miami, FL', 9990001111, 2, 9),
 (4, 80, 'Hotel 2F', 'hotel2f@chain2.com', 'Forest Rd, Portland, OR', 1112223333, 2, 10),
-(3, 60, 'Hotel 2G', 'hotel2g@chain2.com', 'Downtown, Dallas, TX', 2223334444, 2, 11),
-(2, 50, 'Hotel 2H', 'hotel2h@chain2.com', 'Bay St, San Francisco, CA', 3334445555, 2, 12);
+(3, 60, 'Hotel 2G', 'hotel2g@chain2.com', 'Downtown, Dallas, TX', 2223334444, 2, 1),
+(2, 50, 'Hotel 2H', 'hotel2h@chain2.com', 'Bay St, San Francisco, CA', 3334445555, 2, 3);
 
 -- Hotels for Chain 3
 INSERT INTO hotel (rating, number_of_rooms, name, email, address, phone_number, chain_id, manager_id)
