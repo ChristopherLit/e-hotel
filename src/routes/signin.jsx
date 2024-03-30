@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
 
 function SignIn() {
-  const [showCustomerInput, setShowCustomerInput] = useState(true);
-  const [showEmployeeInput, setShowEmployeeInput] = useState(true);
+  const [showInput, setShowInput] = useState(true);
+  const [role, setRole] = useState('');
 
-  const handleCustomerButtonClick = () => {
-    setShowCustomerInput(false);
+  const handleButtonClick = (role) => {
+    setShowInput(false);
+    setRole(role);
   };
 
-  const handleEmployeeButtonClick = () => {
-    setShowEmployeeInput(false);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    console.log('Submitted SSN:', event.target.ssn.value);
+    console.log('Role:', role);
   };
 
   return (
     <div>
-      {showCustomerInput && (
-        <button onClick={handleCustomerButtonClick}>Customer</button>
+      {showInput && (
+        <div>
+          <button onClick={() => handleButtonClick('customer')}>Customer</button>
+          <button onClick={() => handleButtonClick('employee')}>Employee</button>
+        </div>
       )}
-      {showEmployeeInput && (
-        <button onClick={handleEmployeeButtonClick}>Employee</button>
+      {!showInput && (
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="ssn" placeholder="Enter SSN" />
+          <button type="submit">Submit</button>
+        </form>
       )}
-      <div>
-        {(!showCustomerInput || !showEmployeeInput) && (
-          <input type="text" placeholder="Enter SSN" />
-        )}
-      </div>
     </div>
   );
 }
