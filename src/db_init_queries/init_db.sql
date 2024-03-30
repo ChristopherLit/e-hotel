@@ -96,11 +96,14 @@ CREATE TABLE booking_renting (
     renting_status VARCHAR(50), -- could be an ENUM depending on your requirements
     start_date DATE,
     end_date DATE,
-    checkin_date DATE,
-    checkout_date DATE,
     payment NUMERIC, -- Assuming payment is a monetary value
+    credit_card BIGINT,
     employee_ssn_sin INT,
+    hotel_id INT,
+    room_number INT,
     FOREIGN KEY (employee_ssn_sin) REFERENCES employee(employee_ssn_sin)
+    FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id)
+    FOREIGN KEY (room_number) REFERENCES room(room_number)
 );
 
 -- Create the 'book' table (junction table between customers and booking_renting)
@@ -120,4 +123,3 @@ CREATE TABLE reserve (
     FOREIGN KEY (room_number) REFERENCES room(room_number),
     PRIMARY KEY (booking_renting_id, room_number)
 );
-
