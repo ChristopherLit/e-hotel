@@ -18,8 +18,10 @@ function ChooseHotel() {
       });
   }, [filters]);
 
-  console.log("Filters:", filters);
-
+  const handleBookClick = (hotel) => {
+    // Implement booking action for the selected hotel
+    console.log(`Book button clicked for hotel: ${hotel.name}`);
+  };
 
   return (
     <div>
@@ -35,16 +37,15 @@ function ChooseHotel() {
       </div>
       <div>
         <h2>Hotels</h2>
-        <ul>
-          {hotels.map((hotel, index) => (
-            <li key={index}>
-           <h3>{hotel.name}</h3>
+        {hotels.map((hotel, index) => (
+          <div key={index} style={{ border: '1px solid black', padding: '10px', marginBottom: '20px' }}>
+            <h3>{hotel.name}</h3>
             <p><strong>Address:</strong> {hotel.address}</p>
             <p><strong>Rating:</strong> {hotel.rating}</p>
             <p><strong>Number of Rooms:</strong> {hotel.number_of_rooms}</p>
-            </li>
-          ))}
-        </ul>
+            <button onClick={() => handleBookClick(hotel)}>Book</button>
+          </div>
+        ))}
       </div>
     </div>
   );
