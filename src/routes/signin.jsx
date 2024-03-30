@@ -14,7 +14,10 @@ function SignIn() {
   
     console.log('Submitted SSN:', event.target.ssn.value);
     console.log('Role:', role);
+
+    
   };
+
 
   return (
     <div>
