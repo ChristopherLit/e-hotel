@@ -1,5 +1,5 @@
 import pool from '../../db.js'; 
-import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query } from './queries.js';
+import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query } from './queries.js';
 
 const get_hotel_chain = (req, res) => {
     pool.query(hotel_chain_query, (error, results) => {
@@ -58,24 +58,28 @@ const get_hotel_by_filters = (req, res) => {
     });
 };
 
-const get_customer_ssn = (req, res) => {
-    pool.query(customer_query, (error, results) => {
+const check_customer_ssn = (req, res) => {
+    const { ssn } = req.params;
+    pool.query(customer_ssn_query, [ssn], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        res.status(200).json(results.rows);
+        const authorized = results.rows.length > 0; 
+        res.status(200).json({ authorized });
     });
 };
 
-const get_employee_ssn = (req, res) => {
-    pool.query(employee_query, (error, results) => {
+const check_employee_ssn = (req, res) => {
+    const { ssn } = req.params;
+    pool.query(employee_ssn_query, [ssn], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        res.status(200).json(results.rows);
+        const authorized = results.rows.length > 0; 
+        res.status(200).json({ authorized });
     });
 };
 
 
 
-export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, get_customer_ssn, get_employee_ssn};
+export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn};
