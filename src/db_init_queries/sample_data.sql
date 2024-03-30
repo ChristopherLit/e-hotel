@@ -189,20 +189,6 @@ VALUES
 -- Populate the 'booking_renting' table
 INSERT INTO booking_renting (renting_status, start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id)
 VALUES
-('Booked', '2024-04-01', '2026-04-05', 500.00, 1234567890 1, 1),
+('Booked', '2024-04-01', '2026-04-05', 500.00, 1234567890, 1, 1),
 ('Available', '2022-04-02', '2023-04-06', 600.00, 1234567890, 1, 2),
 ('Available', '2022-04-03', '2023-04-07', 700.00, 1234567890, 1, 3);
-
--- Populate the 'book' table
-INSERT INTO book (booking_renting_id, customer_ssn_sin)
-VALUES
-(1, 1),
-(2, 2),
-(3, 3);
-
--- Populate the 'reserve' table
-INSERT INTO reserve (booking_renting_id, room_number)
-VALUES
-(1, 1),
-(2, 3),
-(3, 2);

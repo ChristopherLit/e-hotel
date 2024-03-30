@@ -101,25 +101,7 @@ CREATE TABLE booking_renting (
     employee_ssn_sin INT,
     hotel_id INT,
     room_number INT,
-    FOREIGN KEY (employee_ssn_sin) REFERENCES employee(employee_ssn_sin)
-    FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id)
+    FOREIGN KEY (employee_ssn_sin) REFERENCES employee(employee_ssn_sin),
+    FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id),
     FOREIGN KEY (room_number) REFERENCES room(room_number)
-);
-
--- Create the 'book' table (junction table between customers and booking_renting)
-CREATE TABLE book (
-    booking_renting_id INT NOT NULL,
-    customer_ssn_sin INT NOT NULL,
-    FOREIGN KEY (booking_renting_id) REFERENCES booking_renting(booking_renting_id),
-    FOREIGN KEY (customer_ssn_sin) REFERENCES customer(customer_ssn_sin),
-    PRIMARY KEY (booking_renting_id, customer_ssn_sin)
-);
-
--- Create the 'reserve' table (junction table between booking_renting and room)
-CREATE TABLE reserve (
-    booking_renting_id INT NOT NULL,
-    room_number INT NOT NULL,
-    FOREIGN KEY (booking_renting_id) REFERENCES booking_renting(booking_renting_id),
-    FOREIGN KEY (room_number) REFERENCES room(room_number),
-    PRIMARY KEY (booking_renting_id, room_number)
 );

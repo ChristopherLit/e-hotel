@@ -1,3 +1,4 @@
+import pool from '../../db.js';
 import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, room_query } from './queries.js';
 
 
@@ -62,7 +63,7 @@ const check_customer_ssn = (req, res) => {
     const { ssn } = req.params;
     pool.query(customer_ssn_query, [ssn], (error, results) => {
         if (error) {
-            return res.status(500).json({ error: "custoemr" });
+            return res.status(500).json({ error: error.message });
         }
         const authorized = results.rows.length > 0; 
         res.status(200).json({ authorized });
@@ -73,12 +74,12 @@ const check_employee_ssn = (req, res) => {
     const { ssn } = req.params;
     pool.query(employee_ssn_query, [ssn], (error, results) => {
         if (error) {
-            return res.status(500).json({ error: "asd" });
+            return res.status(500).json({ error: error.message });
         }
-        res.status(200).json(results.rows);
+        const authorized = results.rows.length > 0; 
+        res.status(200).json({ authorized });
     });
 };
-
 const get_rooms_by_filters = (req, res) => {
     const { chain_id, address, rating } = req.params;
 
