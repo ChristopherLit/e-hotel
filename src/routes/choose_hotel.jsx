@@ -18,14 +18,20 @@ function ChooseHotel() {
       });
   }, [filters]);
 
+  console.log("Filters:", filters);
+
+
   return (
     <div>
       <h1>Filter Results</h1>
       <div>
         <h2>Applied Filters</h2>
-        <p><strong>Chain Type:</strong> {filters.chainType}</p>
-        <p><strong>City:</strong> {filters.city}</p>
-        <p><strong>Star Rating:</strong> {filters.star}</p>
+        <p><strong>Chain Type:</strong> {filters.chainType !== undefined ? filters.chainType : ''}</p>
+        <p><strong>City:</strong> {filters.city !== undefined ? filters.city : ''}</p>
+        <p><strong>Date:</strong> {filters.datePicker !== undefined ? filters.datePicker : ''}</p>
+        <p><strong>Price Slider:</strong> {filters.priceSlider !== undefined ? filters.priceSlider : ''}</p>
+        <p><strong>Room Capacity:</strong> {filters.roomCapacity !== undefined ? filters.roomCapacity : ''}</p>
+        <p><strong>Star Rating:</strong> {filters.star !== undefined ? filters.star : ''}</p>
       </div>
       <div>
         <h2>Hotels</h2>
