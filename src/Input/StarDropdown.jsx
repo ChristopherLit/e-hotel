@@ -14,7 +14,7 @@ const StarDropdown = ({ onSelect }) => {
     <div>
       <label htmlFor="stars">Filter by Stars:</label>
       <select id="stars" name="stars" value={selectedStars} onChange={handleStarChange}>
-        <option value="">All stars</option>
+        <option value="any">All stars</option>
         <option value="1">1 Star and up</option>
         <option value="2">2 Stars and up</option>
         <option value="3">3 Stars and up</option>

@@ -23,7 +23,7 @@ const ChainTypeDropdown = ({onSelect}) => {
     <div>
       <label htmlFor="Chain Type">Hotel Chain:</label>
       <select id="type" value={type} onChange={handleChange}>
-        <option value={0}>Any Hotel Chain</option>
+        <option value={"any"}>Any Hotel Chain</option>
         {chainIds.map(chain => (
           <option key={chain[0]} value={chain[0]}>{chain[1]}</option>
         ))}
