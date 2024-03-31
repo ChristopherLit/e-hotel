@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function ChooseRoom() {
   const location = useLocation();
-  const { filters, hotel } = location.state;
+  const { state } = location;
+  const filters = state ? state.filters : {};
+  const hotel = state ? state.hotel : {};
   const [rooms, setRooms] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const formatDate = (date) => {
@@ -45,10 +49,12 @@ function ChooseRoom() {
       .catch((error) => {
         console.error("Error fetching rooms:", error);
       });
-  }, [filters]);
+  }, [filters, hotel]);
 
   const handleBookClick = (room) => {
     console.log(`Book button clicked for room: ${room.name}`);
+    navigate('/payment', { state: { filters: filters, hotel: hotel } });
+
   };
 
   return (
@@ -58,15 +64,12 @@ function ChooseRoom() {
         <h2>Applied Filters</h2>
         <p>
           <strong>Hotel ID:</strong>{" "}
-          {filters.hotel_id !== undefined ? filters.hotel_id : ""}
+          {hotel.hotel_id !== undefined ? hotel.hotel_id : ""}
         </p>
-        <p>
-          <strong>Price:</strong>{" "}
-          {filters.price !== undefined ? filters.price : ""}
-        </p>
+        <p><strong>Price:</strong> {filters.priceSlider !== undefined ? filters.priceSlider : ''}</p>
         <p>
           <strong>Capacity:</strong>{" "}
-          {filters.capacity !== undefined ? filters.capacity : ""}
+          {filters.roomCapacity !== undefined ? filters.roomCapacity : ""}
         </p>
       </div>
       <div>
@@ -82,7 +85,8 @@ function ChooseRoom() {
           >
             <h3>Room Number: {room.room_number}</h3>
             <p>
-              <strong>Price:</strong> {room.price}
+            <strong>Price:</strong>{" "}
+            {filters.priceSlider !== undefined ? filters.priceSlider : ""}
             </p>
             <p>
               <strong>Capacity:</strong> {room.capacity}

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function ChoosePayment() {
   const location = useLocation();
-  const { filters } = location.state;
+  const { filters, hotel } = location.state;
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -19,7 +19,7 @@ function ChoosePayment() {
     if (creditCardNumber.length !== 10) {
       setErrorMessage('Please input a valid 10-digit credit card number.');
     } else {
-      // Proceed with payment logic
+        setErrorMessage('');
     }
   };
 
@@ -28,9 +28,9 @@ function ChoosePayment() {
       <h1>Choose Payment</h1>
       <div>
         <h2>Applied Filters</h2>
-        <p><strong>Hotel ID:</strong> {filters.hotel_id !== undefined ? filters.hotel_id : ''}</p>
-        <p><strong>Price:</strong> {filters.price !== undefined ? filters.price : ''}</p>
-        <p><strong>Capacity:</strong> {filters.capacity !== undefined ? filters.capacity : ''}</p>
+        <p><strong>Hotel ID:</strong> {hotel.hotel_id !== undefined ? hotel.hotel_id : ''}</p>
+        <p><strong>Price:</strong> {filters.priceSlider !== undefined ? filters.priceSlider : ''}</p>
+        <p><strong>Capacity:</strong> {filters.roomCapacity !== undefined ? filters.roomCapacity : ''}</p>
       </div>
       <form onSubmit={handlePaymentSubmit}>
         <div>
