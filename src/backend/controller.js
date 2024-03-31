@@ -164,14 +164,23 @@ const get_hotel_count = (req, res) => {
 
 const delete_booking = (req, res) => {
     const { customer_ssn, hotel_id, room_number } = req.body;
+    
 
     pool.query(delete_booking_query, [customer_ssn, hotel_id, room_number], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        res.status(200).json({ message: 'Booking deleted successfully.' });
+        
+        if (results.rowCount === 1) {
+            // Booking successfully deleted
+            res.status(200).json({ deleted: true });
+        } else {
+            // Booking not found or already deleted
+            res.status(404).json({ deleted: false });
+        }
     });
 };
+
 
 
 export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, 

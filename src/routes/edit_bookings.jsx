@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 function EditBookings() {
   const [customerSSN, setCustomerSSN] = useState('');
   const [hotelID, setHotelID] = useState('');
   const [roomID, setRoomID] = useState('');
-
-  const history = useHistory();
+  const [message, setMessage] = useState('');
 
   const handleDeleteBooking = async () => {
     try {
@@ -22,16 +20,20 @@ function EditBookings() {
         }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        alert('Booking successfully deleted!');
-        // Redirect to another page after successful deletion
-        history.push('/');
+        if (data.deleted) {
+          setMessage('Booking successfully deleted!');
+        } else {
+          setMessage('Booking not found or already deleted.');
+        }
       } else {
-        alert('Failed to delete booking. Please try again.');
+        setMessage('Failed to delete booking. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to delete booking due to an unexpected error.');
+      setMessage('Failed to delete booking due to an unexpected error.');
     }
   };
 
@@ -66,6 +68,7 @@ function EditBookings() {
         />
       </div>
       <button onClick={handleDeleteBooking}>Delete Booking</button>
+      {message && <p>{message}</p>}
     </div>
   );
 }
