@@ -1,5 +1,6 @@
 import pool from '../../db.js';
-import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, room_query, insert_booking_query } from './queries.js';
+import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, 
+    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query } from './queries.js';
 
 
 const get_hotel_chain = (req, res) => {
@@ -138,4 +139,23 @@ const process_payment = (req, res) => {
     });
 };
 
-export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn, get_rooms_by_filters, process_payment};
+const get_hotel_chain_count = (req, res) => {
+    pool.query(hotel_chain_count_query, (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+        res.status(200).json(results.rows);
+    });
+};
+
+const get_hotel_count = (req, res) => {
+    pool.query(hotel_count_query, (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+        res.status(200).json(results.rows);
+    });
+};
+
+export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, 
+    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, get_hotel_count};

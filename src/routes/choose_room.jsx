@@ -74,6 +74,10 @@ function ChooseRoom() {
           <strong>Capacity:</strong>{" "}
           {filters.roomCapacity !== undefined ? filters.roomCapacity : ""}
         </p>
+        <p>
+          <strong>Booking Dates:</strong>{" "}
+          {filters.datePicker !== undefined ? filters.datePicker : ""}
+        </p>
       </div>
       <div>
         <h2>Rooms</h2>
