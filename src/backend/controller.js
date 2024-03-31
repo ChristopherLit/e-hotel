@@ -86,6 +86,9 @@ const check_employee_ssn = (req, res) => {
 const get_rooms_by_filters = (req, res) => {
     const { hotel_id, price, capacity, startDate, endDate } = req.params;
 
+    console.log("dates")
+    console.log(startDate, endDate);
+
     let query = 'SELECT * FROM room WHERE true';
     let queryParams = [];
 
@@ -107,11 +110,10 @@ const get_rooms_by_filters = (req, res) => {
     if (startDate !== 'any' && endDate !== 'any') {
         query += ` AND room_number NOT IN (
             SELECT room_number FROM booking_renting 
-            WHERE NOT (($${queryParams.length + 1} < start_date AND $${queryParams.length + 2} < start_date)
-            OR ($${queryParams.length + 1} > end_date AND $${queryParams.length + 2} > end_date))
+            WHERE start_date < $${queryParams.length + 2} AND end_date > $${queryParams.length + 1}
         )`;
         queryParams.push(startDate, endDate);
-    } 
+    }
 
     console.log("hjere")
     console.log('query:', query);
