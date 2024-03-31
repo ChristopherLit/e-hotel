@@ -7,6 +7,7 @@ import ChooseRoom from './routes/choose_room';
 import ChoosePayment from './routes/choose_payment';
 import EmployeeHomepage from './routes/employee_homepage';
 import ManageSystem from './routes/manage_system';
+import EditBookings from './routes/edit_bookings';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/payment" element={<ChoosePayment />} />
           <Route path="/employee_homepage" element={<EmployeeHomepage />} />
           <Route path="/manage_system" element={<ManageSystem/>}/>
+          <Route path="/edit_bookings" element={<EditBookings/>}/>
         </Routes>
       </div>
     </Router>

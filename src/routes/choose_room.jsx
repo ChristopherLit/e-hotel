@@ -7,7 +7,7 @@ function ChooseRoom() {
   const { state } = location;
   const filters = state ? state.filters : {};
   const hotel = state ? state.hotel : {};
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState([]); // NOTE THAT THESE ARE THE ROOMS UNAVAILABLE/ALREADY BOOKED
   const navigate = useNavigate();
   const [parsedStartDate, setParsedStartDate] = useState("any");
   const [parsedEndDate, setParsedEndDate] = useState("any");
@@ -48,6 +48,7 @@ function ChooseRoom() {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         setRooms(data);
       })
       .catch((error) => {

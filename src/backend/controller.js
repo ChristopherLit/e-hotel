@@ -107,10 +107,15 @@ const get_rooms_by_filters = (req, res) => {
     if (startDate !== 'any' && endDate !== 'any') {
         query += ` AND room_number NOT IN (
             SELECT room_number FROM booking_renting 
-            WHERE start_date <= $${queryParams.length + 2} AND end_date >= $${queryParams.length + 1}
+            WHERE NOT (($${queryParams.length + 1} < start_date AND $${queryParams.length + 2} < start_date)
+            OR ($${queryParams.length + 1} > end_date AND $${queryParams.length + 2} > end_date))
         )`;
         queryParams.push(startDate, endDate);
-    }
+    } 
+
+    console.log("hjere")
+    console.log('query:', query);
+    console.log('queryParams:', queryParams);
 
     pool.query(query, queryParams, (error, results) => {
         if (error) {
@@ -156,6 +161,7 @@ const get_hotel_count = (req, res) => {
         res.status(200).json(results.rows);
     });
 };
+
 
 export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, 
     check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, get_hotel_count};
