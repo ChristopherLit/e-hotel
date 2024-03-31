@@ -55,6 +55,7 @@ function SignIn() {
         <div>
           <button onClick={() => handleButtonClick('customer')}>Customer</button>
           <button onClick={() => handleButtonClick('employee')}>Employee</button>
+          <button onClick={() => navigate('/create_customer_account')}>Create Customer Account</button>
         </div>
       )}
       {!showInput && (

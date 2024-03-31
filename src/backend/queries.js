@@ -11,7 +11,7 @@ const delete_booking_query = `DELETE FROM booking_renting WHERE customer_ssn_sin
 const update_booking_query = `UPDATE booking_renting 
                               SET credit_card = $1 
                               WHERE customer_ssn_sin = $2 AND hotel_id = $3 AND room_number = $4`;
-
+const create_customer_query = `INSERT INTO customer (customer_ssn_sin, first_name, last_name, registration_date) VALUES ($1, $2, $3, $4)`;
 
 
 export { hotel_chain_query, 
@@ -24,5 +24,6 @@ export { hotel_chain_query,
             hotel_chain_count_query,
             hotel_count_query,
             delete_booking_query,
-            update_booking_query
+            update_booking_query,
+            create_customer_query
 }
