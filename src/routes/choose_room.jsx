@@ -7,39 +7,35 @@ function ChooseRoom() {
   const { state } = location;
   const filters = state ? state.filters : {};
   const hotel = state ? state.hotel : {};
-  const [rooms, setRooms] = useState([]); // NOTE THAT THESE ARE THE ROOMS UNAVAILABLE/ALREADY BOOKED
+  const [rooms, setRooms] = useState([]); 
   const navigate = useNavigate();
-  const [parsedStartDate, setParsedStartDate] = useState("any");
-  const [parsedEndDate, setParsedEndDate] = useState("any");
   const hotel_id = hotel.hotel_id; // Access hotel_id directly here
 
-  useEffect(() => {
-    const formatDate = (date) => {
-      if (!date) return "any";
-      const [day, month, year] = date
-        .split("-")[0]
-        .trim()
-        .replaceAll("/", "-")
-        .split("-");
-      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-    };
+  const formatDate = (date) => {
+    if (!date) return "any";
+    const [day, month, year] = date
+      .split("-")[0]
+      .trim()
+      .replaceAll("/", "-")
+      .split("-");
+    return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  };
 
+  useEffect(() => {
     const validateParam = (param) => (param && !isNaN(param) ? param : "any");
 
     const capacity = validateParam(filters.roomCapacity);
     const price = validateParam(filters.priceSlider);
     const startDate = filters.datePicker
-      ? formatDate(filters.datePicker.split("-")[0])
-      : "any";
-    const endDate = filters.datePicker
-      ? formatDate(filters.datePicker.split("-")[1])
-      : "any";
-    setParsedStartDate(startDate);
-    setParsedEndDate(endDate);
+    ? formatDate(filters.datePicker.split("-")[0])
+    : "any";
+  const endDate = filters.datePicker
+    ? formatDate(filters.datePicker.split("-")[1])
+    : "any";
 
     // Fetch rooms based on the provided filters
     fetch(
-      `http://localhost:3000/api/rooms/${hotel_id}/${price}/${capacity}/${parsedStartDate}/${parsedEndDate}`
+      `http://localhost:3000/api/rooms/${hotel_id}/${price}/${capacity}/${startDate}/${endDate}`
     )
       .then((response) => {
         if (!response.ok) {
