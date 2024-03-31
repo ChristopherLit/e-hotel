@@ -5,7 +5,7 @@ import { getCustomerSSN } from '../Input/globalSSN';
 function ChoosePayment() {
   const location = useLocation();
   const { state } = location;
-  const { room, startDate, endDate, filters } = state;
+  const { room, startDate, endDate, filters, hotel_id } = state;
 
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [customerSSNInput, setCustomerSSNInput] = useState('');
@@ -29,11 +29,17 @@ function ChoosePayment() {
     setCreditCardNumber(inputCreditCardNumber);
   };
 
-  let customerSSN = getCustomerSSN();
-  console.log("customer SSN: " + customerSSN)
-
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
+
+    console.log('start_date:', startDate);
+console.log('end_date:', endDate);
+console.log('payment:', totalCost);
+console.log('credit_card:', creditCardNumber);
+console.log('customer_ssn_sin:', customerSSNInput);
+console.log('hotel_id:', hotel_id);
+console.log('room_number:', room.room_number);
+
 
     if (creditCardNumber.length !== 10) {
       setErrorMessage('Please input a valid 10-digit credit card number.');
@@ -52,8 +58,8 @@ function ChoosePayment() {
             end_date: endDate,
             payment: totalCost,
             credit_card: creditCardNumber,
-            customer_ssn_sin: customerSSNInput, // Use customerSSNInput instead of customerSSN
-            hotel_id: filters.chainType,
+            customer_ssn_sin: customerSSNInput,
+            hotel_id: hotel_id,
             room_number: room.room_number
           }),
         });

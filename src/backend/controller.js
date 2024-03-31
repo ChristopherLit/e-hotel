@@ -120,10 +120,10 @@ const get_rooms_by_filters = (req, res) => {
 };
 
 const process_payment = (req, res) => {
-    const { start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number } = req.body;
+    const { start_date, end_date, payment, credit_card, customer_ssn_sin, hotel_id, room_number } = req.body;
     
     
-    pool.query(insert_booking_query, [start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number], (error, results) => {
+    pool.query(insert_booking_query, [start_date, end_date, payment, credit_card, customer_ssn_sin, hotel_id, room_number], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }

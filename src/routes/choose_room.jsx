@@ -11,6 +11,7 @@ function ChooseRoom() {
   const navigate = useNavigate();
   const [parsedStartDate, setParsedStartDate] = useState("any");
   const [parsedEndDate, setParsedEndDate] = useState("any");
+  const hotel_id = hotel.hotel_id; // Access hotel_id directly here
 
   useEffect(() => {
     const formatDate = (date) => {
@@ -25,7 +26,6 @@ function ChooseRoom() {
 
     const validateParam = (param) => (param && !isNaN(param) ? param : "any");
 
-    const hotel_id = validateParam(hotel.hotel_id);
     const capacity = validateParam(filters.roomCapacity);
     const price = validateParam(filters.priceSlider);
     const startDate = filters.datePicker
@@ -36,7 +36,7 @@ function ChooseRoom() {
       : "any";
     setParsedStartDate(startDate);
     setParsedEndDate(endDate);
-    
+
     // Fetch rooms based on the provided filters
     fetch(
       `http://localhost:3000/api/rooms/${hotel_id}/${price}/${capacity}/${parsedStartDate}/${parsedEndDate}`
@@ -56,7 +56,8 @@ function ChooseRoom() {
   }, []);
 
   const handleBookClick = (room) => {
-    navigate('/payment', { state: { filters: filters, hotel: hotel, room: room, startDate: parsedStartDate, endDate: parsedEndDate } });
+    console.log("hotel ID: " + hotel_id); // Access hotel_id here
+    navigate('/payment', { state: { filters: filters, hotel: hotel, room: room, startDate: parsedStartDate, endDate: parsedEndDate, hotel_id: hotel_id } });
   };
 
   return (
