@@ -18,7 +18,7 @@ const PriceSlider = ({onSelect}) => {
         id="price"
         name="price"
         min="0"
-        max="200"
+        max="600"
         value={price}
         onChange={handleSliderChange}
       />

@@ -187,8 +187,8 @@ VALUES
 ('Charlie', 'Brown', '2024-04-01');
 
 -- Populate the 'booking_renting' table
-INSERT INTO booking_renting (renting_status, start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number)
+INSERT INTO booking_renting (start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number)
 VALUES
-('Booked', '2024-04-01', '2026-04-05', 500.00, 1234567890, 1, 1, 1),
-('Available', '2022-04-02', '2023-04-06', 600.00, 1234567890, 1, 2, 2),
-('Available', '2022-04-03', '2023-04-07', 700.00, 1234567890, 1, 3, 3);
+('2024-04-01', '2026-04-05', 500.00, 1234567890, 1, 1, 1),
+('2022-04-02', '2023-04-06', 600.00, 1234567890, 1, 2, 2),
+('2022-04-03', '2023-04-07', 700.00, 1234567890, 1, 3, 3);
