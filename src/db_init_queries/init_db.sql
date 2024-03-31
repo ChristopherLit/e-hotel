@@ -93,10 +93,10 @@ CREATE TABLE customer (
 -- Create the 'booking_renting' table
 CREATE TABLE booking_renting (
     booking_renting_id SERIAL PRIMARY KEY,
-    renting_status VARCHAR(50), -- could be an ENUM depending on your requirements
+ 
     start_date DATE,
     end_date DATE,
-    payment NUMERIC, -- Assuming payment is a monetary value
+    payment NUMERIC, -- Amount
     credit_card BIGINT,
     employee_ssn_sin INT,
     hotel_id INT,
