@@ -88,19 +88,19 @@ const get_rooms_by_filters = (req, res) => {
     let queryParams = [];
 
     // Filter by hotel_id if it's not 'any'
-    if (hotel_id !== 'any') {
+    if (hotel_id) {
         query += ' AND hotel_id = $' + (queryParams.length + 1);
         queryParams.push(parseInt(hotel_id, 10));
     }
 
     // Filter by price if it's not 'any'
-    if (price !== 'any') {
+    if (price) {
         query += ' AND price <= $' + (queryParams.length + 1);
         queryParams.push(parseInt(price, 10));
     }
 
     // Filter by capacity if it's not 'any'
-    if (capacity !== 'any') {
+    if (capacity) {
         query += ' AND capacity = $' + (queryParams.length + 1);
         queryParams.push(parseInt(capacity, 10));
     }
@@ -109,10 +109,7 @@ const get_rooms_by_filters = (req, res) => {
     if (startDate && endDate) {
         query += ` AND room_number NOT IN (
             SELECT room_number FROM booking_renting 
-            WHERE (start_date <= $${queryParams.length + 1} AND end_date >= $${queryParams.length + 2}) 
-            OR (start_date >= $${queryParams.length + 1} AND end_date <= $${queryParams.length + 2}) 
-            OR (start_date <= $${queryParams.length + 1} AND end_date >= $${queryParams.length + 1}) 
-            OR (start_date <= $${queryParams.length + 2} AND end_date >= $${queryParams.length + 2})
+            WHERE start_date <= $${queryParams.length + 2} AND end_date >= $${queryParams.length + 1}
         )`;
         queryParams.push(startDate, endDate);
     }
@@ -127,4 +124,4 @@ const get_rooms_by_filters = (req, res) => {
 
 
 
-export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn, get_rooms_by_filters};
+export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn, get_rooms_by_filters };

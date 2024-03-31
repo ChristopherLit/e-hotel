@@ -23,6 +23,7 @@ function ChooseHotel() {
   const handleBookClick = (hotel) => {
  
     console.log(`Book button clicked for hotel: ${hotel.name}`);
+    console.log(filters, hotel);
     navigate('/rooms', { state: { filters: filters, hotel: hotel } });
 
   }

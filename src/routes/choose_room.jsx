@@ -3,30 +3,37 @@ import { useLocation } from 'react-router-dom';
 
 function ChooseRoom() {
   const location = useLocation();
-  const filters = location.state ? location.state.filters : {};
+  const {filters, hotel } = location.state;
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    const { hotel_id, price, capacity, startDate, endDate } = filters;
+    const hotel_id = hotel.hotel_id;
+    const capacity = filters.roomCapacity;
+    const price = filters.priceSlider;
+    const startDate = filters.datePicker.split('-')[0].trim().replaceAll('/', '-');
+    const endDate = filters.datePicker.split('-')[1].trim().replaceAll('/', '-');
+    console.log(hotel_id, capacity, price, startDate, endDate);
+    const parsedStartTemp = startDate.split('-');
+    const parsedStartDate = `${parsedStartTemp[2]}-${parsedStartTemp[1].padStart(2, '0')}-${parsedStartTemp[0].padStart(2, '0')}`; // reformat to 'YYYY-MM-DD'
+    const parsedEndTemp = endDate.split('-');
+    const parsedEndDate = `${parsedEndTemp[2]}-${parsedEndTemp[1].padStart(2, '0')}-${parsedEndTemp[0].padStart(2, '0')}`; // reformat to 'YYYY-MM-DD'
 
-    // Check if all necessary filters are defined
-    if (hotel_id !== undefined && price !== undefined && capacity !== undefined && startDate !== undefined && endDate !== undefined) {
-      // Fetch rooms based on the provided filters
-      fetch(`http://localhost:3000/api/rooms/${hotel_id}/${price}/${capacity}/${startDate}/${endDate}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch rooms');
-          }
-          return response.json();
-        })
-        .then(data => {
-          setRooms(data);
-        })
-        .catch(error => {
-          console.error('Error fetching rooms:', error);
-        });
-    }
-  }, [filters]);
+    // Fetch rooms based on the provided filters
+    fetch(`http://localhost:3000/api/rooms/${hotel_id}/${price}/${capacity}/${parsedStartDate}/${parsedEndDate}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch rooms');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setRooms(data);
+      })
+      .catch(error => {
+        console.error('Error fetching rooms:', error);
+      });
+      
+    }, [filters]);
 
   const handleBookClick = (room) => {
     console.log(`Book button clicked for room: ${room.name}`);
