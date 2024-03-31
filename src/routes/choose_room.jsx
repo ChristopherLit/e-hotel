@@ -9,6 +9,8 @@ function ChooseRoom() {
   const hotel = state ? state.hotel : {};
   const [rooms, setRooms] = useState([]);
   const navigate = useNavigate();
+  const [parsedStartDate, setParsedStartDate] = useState("any");
+  const [parsedEndDate, setParsedEndDate] = useState("any");
 
   useEffect(() => {
     const formatDate = (date) => {
@@ -26,13 +28,15 @@ function ChooseRoom() {
     const hotel_id = validateParam(hotel.hotel_id);
     const capacity = validateParam(filters.roomCapacity);
     const price = validateParam(filters.priceSlider);
-    const parsedStartDate = filters.datePicker
+    const startDate = filters.datePicker
       ? formatDate(filters.datePicker.split("-")[0])
       : "any";
-    const parsedEndDate = filters.datePicker
+    const endDate = filters.datePicker
       ? formatDate(filters.datePicker.split("-")[1])
       : "any";
-
+    setParsedStartDate(startDate);
+    setParsedEndDate(endDate);
+    
     // Fetch rooms based on the provided filters
     fetch(
       `http://localhost:3000/api/rooms/${hotel_id}/${price}/${capacity}/${parsedStartDate}/${parsedEndDate}`
@@ -49,12 +53,10 @@ function ChooseRoom() {
       .catch((error) => {
         console.error("Error fetching rooms:", error);
       });
-  }, [filters, hotel]);
+  }, []);
 
   const handleBookClick = (room) => {
-    console.log(`Book button clicked for room: ${room.name}`);
-    navigate('/payment', { state: { filters: filters, hotel: hotel, rooms: rooms } });
-
+    navigate('/payment', { state: { filters: filters, hotel: hotel, room: room, startDate: parsedStartDate, endDate: parsedEndDate } });
   };
 
   return (
@@ -99,7 +101,9 @@ function ChooseRoom() {
               <strong>Expandable Bed:</strong>{" "}
               {room.expandable_bed ? "Yes" : "No"}
             </p>
-            <button onClick={() => handleBookClick(room)}>Book</button>
+            <button onClick={() => {
+                handleBookClick(room);
+            }}>Book</button>
           </div>
         ))}
       </div>

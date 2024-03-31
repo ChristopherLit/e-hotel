@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function ChoosePayment() {
   const location = useLocation();
-  const { filters, hotel, rooms } = location.state;
+  const { filters, hotel, room, startDate, endDate } = location.state;
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
@@ -26,9 +26,6 @@ const handlePaymentSubmit = async (event) => {
     event.preventDefault();
   
     let chain_id = filters.chainType === "" ? "any" : filters.chainType;
-    let datePicker = filters.datePicker === "" ? "any" : filters.datePicker;
-   
-  
     // let startDate = "any";
     // let endDate = "any";
   
@@ -53,11 +50,11 @@ const handlePaymentSubmit = async (event) => {
           body: JSON.stringify({
             start_date: startDate,
             end_date: endDate,
-            payment: rooms.price,
+            payment: room.price,
             credit_card: creditCardNumber,
             employee_ssn_sin: filters.employeeSSN,
             hotel_id: chain_id,
-            room_number: filters.roomNumber
+            room_number: room.room_number
           }),
         });
   
