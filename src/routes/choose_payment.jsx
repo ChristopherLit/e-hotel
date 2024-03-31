@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function ChoosePayment() {
   const location = useLocation();
-  const { filters, hotel } = location.state;
+  const { filters, hotel, rooms } = location.state;
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
@@ -14,10 +14,31 @@ function ChoosePayment() {
     setCreditCardNumber(inputCreditCardNumber);
   };
 
+//   datePicker: "",
+//   roomCapacity: "",
+//   chainType: "",
+//   priceSlider: "",
+//   city: "",
+//   star: "",
+//   start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number 
 
-  const handlePaymentSubmit = async (event) => {
+const handlePaymentSubmit = async (event) => {
     event.preventDefault();
+  
     let chain_id = filters.chainType === "" ? "any" : filters.chainType;
+    let datePicker = filters.datePicker === "" ? "any" : filters.datePicker;
+   
+  
+    // let startDate = "any";
+    // let endDate = "any";
+  
+    // if (datePicker !== "any") {
+    //   const [startStr, endStr] = datePicker.split(" - ");
+    //   const [startDay, startMonth, startYear] = startStr.split("/");
+    //   const [endDay, endMonth, endYear] = endStr.split("/");
+    //   startDate = `${startYear}-${startMonth}-${startDay}`;
+    //   endDate = `${endYear}-${endMonth}-${endDay}`;
+    // }
   
     if (creditCardNumber.length !== 10) {
       setErrorMessage('Please input a valid 10-digit credit card number.');
@@ -30,9 +51,9 @@ function ChoosePayment() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            start_date: filters.startDate,
-            end_date: filters.endDate,
-            payment: filters.paymentAmount,
+            start_date: startDate,
+            end_date: endDate,
+            payment: rooms.price,
             credit_card: creditCardNumber,
             employee_ssn_sin: filters.employeeSSN,
             hotel_id: chain_id,
@@ -54,6 +75,7 @@ function ChoosePayment() {
       }
     }
   };
+  
   
 
   return (

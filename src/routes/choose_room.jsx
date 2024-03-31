@@ -53,7 +53,7 @@ function ChooseRoom() {
 
   const handleBookClick = (room) => {
     console.log(`Book button clicked for room: ${room.name}`);
-    navigate('/payment', { state: { filters: filters, hotel: hotel } });
+    navigate('/payment', { state: { filters: filters, hotel: hotel, rooms: rooms } });
 
   };
 
@@ -84,10 +84,7 @@ function ChooseRoom() {
             }}
           >
             <h3>Room Number: {room.room_number}</h3>
-            <p>
-            <strong>Price:</strong>{" "}
-            {filters.priceSlider !== undefined ? filters.priceSlider : ""}
-            </p>
+            <p><strong>Price:</strong> {room.price}</p>
             <p>
               <strong>Capacity:</strong> {room.capacity}
             </p>
