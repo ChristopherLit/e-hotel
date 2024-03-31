@@ -16,8 +16,8 @@ frontend
 - react + vite
 
 # how to run
+make sure to install the latest version of node.js
 ## install dependencies
-install the latest version of node.js
 ```bash
 npm install express pg cors react-router-dom
 ```
