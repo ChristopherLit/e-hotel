@@ -8,6 +8,7 @@ function ManageSystem() {
       <h1>Manage System</h1>
       <button onClick={() => navigate('/edit_bookings')}>Edit Bookings</button>
       <button onClick={() => navigate('/create_customer_account')}>Create Customer Account</button>
+      <button onClick={() => navigate('/system_info')}>System Info</button>
     </div>
   );
 }

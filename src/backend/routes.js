@@ -1,6 +1,7 @@
 import express from 'express';
 import { get_hotel_chain, get_hotel_chain_by_id, get_hotel_chain_ids, get_hotel_by_filters, check_customer_ssn, 
-    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, get_hotel_count, delete_booking, update_booking, create_customer_account } from './controller.js';
+    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, 
+    get_hotel_count, delete_booking, update_booking, create_customer_account, get_revenue } from './controller.js';
 
 const router = express.Router();
 
@@ -11,6 +12,7 @@ router.get('/hotel/:chain_id/:address/:rating', get_hotel_by_filters);
 router.get('/rooms/:hotel_id/:price/:capacity/:startDate/:endDate', get_rooms_by_filters);
 router.get('/hotelchain/count', get_hotel_chain_count);
 router.get('/hotel/count', get_hotel_count);
+router.get('/revenue', get_revenue);
 
 router.post('/check/ssnemployee/:ssn', check_employee_ssn);
 router.post('/check/ssncustomer/:ssn', check_customer_ssn);
