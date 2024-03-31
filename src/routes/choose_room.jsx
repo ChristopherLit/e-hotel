@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ChooseRoom() {
   const location = useLocation();
   const {filters, hotel } = location.state;
   const [rooms, setRooms] = useState([]);
+   const navigate = useNavigate();
 
   useEffect(() => {
     const hotel_id = hotel.hotel_id;
     const capacity = filters.roomCapacity;
     const price = filters.priceSlider;
-    const startDate = filters.datePicker.split('-')[0].trim().replaceAll('/', '-');
-    const endDate = filters.datePicker.split('-')[1].trim().replaceAll('/', '-');
-    console.log(hotel_id, capacity, price, startDate, endDate);
-    const parsedStartTemp = startDate.split('-');
-    const parsedStartDate = `${parsedStartTemp[2]}-${parsedStartTemp[1].padStart(2, '0')}-${parsedStartTemp[0].padStart(2, '0')}`; // reformat to 'YYYY-MM-DD'
-    const parsedEndTemp = endDate.split('-');
-    const parsedEndDate = `${parsedEndTemp[2]}-${parsedEndTemp[1].padStart(2, '0')}-${parsedEndTemp[0].padStart(2, '0')}`; // reformat to 'YYYY-MM-DD'
-
+    let parsedStartDate,parsedEndDate;
+    if (filters.datePicker)
+    {
+        const startDate = filters.datePicker.split('-')[0].trim().replaceAll('/', '-');
+        const endDate = filters.datePicker.split('-')[1].trim().replaceAll('/', '-');
+        const parsedStartTemp = startDate.split('-');
+        parsedStartDate = `${parsedStartTemp[2]}-${parsedStartTemp[1].padStart(2, '0')}-${parsedStartTemp[0].padStart(2, '0')}`; // reformat to 'YYYY-MM-DD'
+        const parsedEndTemp = endDate.split('-');
+        parsedEndDate = `${parsedEndTemp[2]}-${parsedEndTemp[1].padStart(2, '0')}-${parsedEndTemp[0].padStart(2, '0')}`; // reformat to 'YYYY-MM-DD'
+    }
+   
     // Fetch rooms based on the provided filters
     fetch(`http://localhost:3000/api/rooms/${hotel_id}/${price}/${capacity}/${parsedStartDate}/${parsedEndDate}`)
       .then(response => {
@@ -37,6 +42,7 @@ function ChooseRoom() {
 
   const handleBookClick = (room) => {
     console.log(`Book button clicked for room: ${room.name}`);
+    navigate('/rooms', { state: { filters: filters, hotel: hotel } });
   };
 
   return (

@@ -4,6 +4,7 @@ import Input from './Input/Input';
 import ChooseHotel from './routes/choose_hotel';
 import SignIn from './routes/signin';
 import ChooseRoom from './routes/choose_room';
+import ChoosePayment from './routes/choose_payment';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/input" element={<Input />} />
           <Route path="/hotels" element={<ChooseHotel />} />
           <Route path="/rooms" element={<ChooseRoom />} />
+          <Route path="/payment" element={<ChoosePayment />} />
         </Routes>
       </div>
     </Router>
