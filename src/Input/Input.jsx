@@ -17,7 +17,7 @@ function Input() {
     priceSlider: "",
     city: "",
     star: "",
-    // numberOfRooms: ""
+    //numberOfRooms: "",
   });
 
   const navigate = useNavigate();

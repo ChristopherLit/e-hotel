@@ -27,6 +27,8 @@ function ChoosePayment() {
     setCreditCardNumber(inputCreditCardNumber);
   };
 
+  console.log("snn " + filters.employeeSSN)
+
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
 
@@ -45,7 +47,7 @@ function ChoosePayment() {
             end_date: endDate,
             payment: totalCost,
             credit_card: creditCardNumber,
-            employee_ssn_sin: filters.employeeSSN,
+            customer_ssn_sin: filters.employeeSSN,
             hotel_id: filters.chainType,
             room_number: room.room_number
           }),
@@ -71,13 +73,13 @@ function ChoosePayment() {
       <h1>Choose Payment</h1>
       <div>
         <h2>Applied Filters</h2>
-        <p><strong>Hotel ID:</strong> {filters.chainType}</p> {/* Assuming chainType represents hotel_id */}
+        <p><strong>Hotel ID:</strong> {filters.chainType}</p> 
         <p><strong>Price:</strong> {room.price}</p>
         <p><strong>Capacity:</strong> {filters.roomCapacity}</p>
       </div>
       <div>
         <h2>Total Cost</h2>
-        <p>{totalCost !== null ? `$${totalCost}` : 'Calculating...'}</p> {/* Display total cost */}
+        <p>{totalCost !== null ? `$${totalCost}` : 'Calculating...'}</p> 
       </div>
       <form onSubmit={handlePaymentSubmit}>
         <div>
