@@ -7,19 +7,41 @@ function ChoosePayment() {
   const { filters, hotel } = location.state;
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleCreditCardChange = (event) => {
     const inputCreditCardNumber = event.target.value;
     setCreditCardNumber(inputCreditCardNumber);
   };
 
-  const handlePaymentSubmit = (event) => {
+  const handlePaymentSubmit = async (event) => {
     event.preventDefault();
 
     if (creditCardNumber.length !== 10) {
       setErrorMessage('Please input a valid 10-digit credit card number.');
     } else {
-        setErrorMessage('');
+      try {
+        // Send a POST request if the credit card number is valid
+        const response = await fetch('http://localhost:3000/api/payment', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ creditCardNumber }), // Sending the credit card number in the request body
+        });
+
+        if (response.ok) {
+          // Payment successful, navigate to another page
+          navigate('/success');
+        } else {
+          // Payment failed, display error message
+          setErrorMessage('Payment failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle fetch error
+        setErrorMessage('Payment failed due to an unexpected error.');
+      }
     }
   };
 
