@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { setCustomerSSN, setEmployeeSSN } from '../Input/globalSSN';
 
 function SignIn() {
   const [showInput, setShowInput] = useState(true);
@@ -15,10 +16,10 @@ function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     let ssnFinderRoute = role === 'customer' ? 'ssncustomer' : 'ssnemployee';
-
-    // send the SSN to the server to check if it exists in the database
+  
+    // Send the SSN to the server to check if it exists in the database
     fetch(`http://localhost:3000/api/check/${ssnFinderRoute}/${ssn}`, {
       method: 'POST',
       headers: {
@@ -29,7 +30,13 @@ function SignIn() {
       .then(response => response.json())
       .then(data => {
         if (data.authorized) {
-          // redirect to another page
+          // Set the SSN based on the role
+          if (role === 'customer') {
+            setCustomerSSN(ssn);
+          } else if (role === 'employee') {
+            setEmployeeSSN(ssn);
+          }
+          // Redirect to another page
           navigate('/input');
         } else {
           // SSN is not found, display an error message
@@ -39,8 +46,8 @@ function SignIn() {
       .catch(error => {
         console.error('Error:', error);
       });
-
   };
+  
 
   return (
     <div>

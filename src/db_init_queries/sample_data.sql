@@ -166,29 +166,29 @@ VALUES
 ('Maintenance');
 
 -- Populate the 'employee' table
-INSERT INTO employee (first_name, last_name, address)
+INSERT INTO employee (employee_ssn_sin, first_name, last_name, address)
 VALUES
-('Crundee', 'Yasuo', '45 Mann Ave'),
-('Dotroy', 'Hum', '456 Elm St'),
-('August', 'Lin', '789 Oak St');
+(121, 'Crundee', 'Yasuo', '45 Mann Ave'),
+(232, 'Dotroy', 'Hum', '456 Elm St'),
+(343, 'August', 'Lin', '789 Oak St');
 
 -- Populate the 'works_for' table
 INSERT INTO works_for (hotel_id, employee_ssn_sin)
 VALUES
-(1, 1),
-(2, 2),
-(3, 3);
+(1, 121),
+(2, 232),
+(3, 343);
 
 -- Populate the 'customer' table
-INSERT INTO customer (first_name, last_name, registration_date)
+INSERT INTO customer (customer_ssn_sin, first_name, last_name, registration_date)
 VALUES
-('Alice', 'Johnson', '2024-03-29'),
-('Bob', 'Williams', '2024-03-30'),
-('Charlie', 'Brown', '2024-04-01');
+(111, 'Alice', 'Johnson', '2024-03-29'),
+(222, 'Bob', 'Williams', '2024-03-30'),
+(333, 'Charlie', 'Brown', '2024-04-01');
 
 -- Populate the 'booking_renting' table
-INSERT INTO booking_renting (start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number)
+INSERT INTO booking_renting (start_date, end_date, payment, credit_card, customer_ssn_sin, hotel_id, room_number)
 VALUES
-('2024-04-01', '2026-04-05', 500.00, 1234567890, 1, 1, 1),
-('2022-04-02', '2023-04-06', 600.00, 1234567890, 1, 2, 2),
-('2022-04-03', '2023-04-07', 700.00, 1234567890, 1, 3, 3);
+('2024-04-01', '2026-04-05', 500.00, 1234567890, 111, 1, 1),
+('2022-04-02', '2023-04-06', 600.00, 1234567890, 222, 2, 2),
+('2022-04-03', '2023-04-07', 700.00, 1234567890, 333, 3, 3);

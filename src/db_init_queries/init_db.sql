@@ -67,7 +67,7 @@ CREATE TABLE roles (
 
 -- Create the 'employee' table
 CREATE TABLE employee (
-    employee_ssn_sin SERIAL PRIMARY KEY,
+    employee_ssn_sin INT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     address VARCHAR(255)
@@ -84,7 +84,7 @@ CREATE TABLE works_for (
 
 -- Create the 'customer' table
 CREATE TABLE customer (
-    customer_ssn_sin SERIAL PRIMARY KEY,
+    customer_ssn_sin INT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     registration_date DATE NOT NULL
@@ -93,15 +93,14 @@ CREATE TABLE customer (
 -- Create the 'booking_renting' table
 CREATE TABLE booking_renting (
     booking_renting_id SERIAL PRIMARY KEY,
- 
     start_date DATE,
     end_date DATE,
-    payment NUMERIC, -- Amount
+    payment INT, -- Amount
     credit_card BIGINT,
-    employee_ssn_sin INT,
+    customer_ssn_sin INT,
     hotel_id INT,
     room_number INT,
-    FOREIGN KEY (employee_ssn_sin) REFERENCES employee(employee_ssn_sin),
+    FOREIGN KEY (customer_ssn_sin) REFERENCES customer(customer_ssn_sin),
     FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id),
     FOREIGN KEY (room_number) REFERENCES room(room_number)
 );
