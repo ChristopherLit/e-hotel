@@ -14,9 +14,11 @@ function ChoosePayment() {
     setCreditCardNumber(inputCreditCardNumber);
   };
 
+
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
-
+    let chain_id = filters.chainType === "" ? "any" : filters.chainType;
+  
     if (creditCardNumber.length !== 10) {
       setErrorMessage('Please input a valid 10-digit credit card number.');
     } else {
@@ -27,9 +29,17 @@ function ChoosePayment() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ creditCardNumber }), // Sending the credit card number in the request body
+          body: JSON.stringify({
+            start_date: filters.startDate,
+            end_date: filters.endDate,
+            payment: filters.paymentAmount,
+            credit_card: creditCardNumber,
+            employee_ssn_sin: filters.employeeSSN,
+            hotel_id: chain_id,
+            room_number: filters.roomNumber
+          }),
         });
-
+  
         if (response.ok) {
           // Payment successful, navigate to another page
           console.log("Success");
@@ -44,6 +54,7 @@ function ChoosePayment() {
       }
     }
   };
+  
 
   return (
     <div>

@@ -72,6 +72,7 @@ const check_customer_ssn = (req, res) => {
 
 const check_employee_ssn = (req, res) => {
     const { ssn } = req.params;
+
     pool.query(employee_ssn_query, [ssn], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
@@ -120,6 +121,7 @@ const get_rooms_by_filters = (req, res) => {
 
 const process_payment = (req, res) => {
     const { start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number } = req.body;
+    
 
     pool.query(insert_booking_query, [start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number], (error, results) => {
         if (error) {
