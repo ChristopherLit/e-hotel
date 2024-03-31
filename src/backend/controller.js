@@ -1,6 +1,6 @@
 import pool from '../../db.js';
 import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, 
-    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query, delete_booking_query } from './queries.js';
+    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query, delete_booking_query, update_booking_query } from './queries.js';
 
 
 const get_hotel_chain = (req, res) => {
@@ -181,7 +181,26 @@ const delete_booking = (req, res) => {
     });
 };
 
+const update_booking = (req, res) => {
+    const { customer_ssn, hotel_id, room_number, credit_card } = req.body;
+    
+    pool.query(update_booking_query, [credit_card, customer_ssn, hotel_id, room_number], (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+        
+        if (results.rowCount === 1) {
+            // Booking credit card successfully updated
+            res.status(200).json({ updated: true });
+        } else {
+            // Booking not found or credit card not updated
+            res.status(404).json({ updated: false });
+        }
+    });
+};
+
+
 
 
 export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, 
-    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, get_hotel_count, delete_booking};
+    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, get_hotel_count, delete_booking, update_booking};
