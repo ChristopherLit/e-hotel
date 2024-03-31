@@ -17,7 +17,7 @@ function setEmployeeSSN(ssn) {
   employeeSSN = ssn;
 }
 
-module.exports = {
+export {
   getCustomerSSN,
   setCustomerSSN,
   getEmployeeSSN,

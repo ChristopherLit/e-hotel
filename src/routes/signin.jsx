@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
-import { setCustomerSSN, setEmployeeSSN } from '../globalSSN';
+import { setCustomerSSN, setEmployeeSSN } from '../Input/globalSSN';
 
 function SignIn() {
   const [showInput, setShowInput] = useState(true);

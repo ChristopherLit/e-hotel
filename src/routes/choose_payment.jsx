@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getCustomerSSN } from '../Input/globalSSN';
 
 function ChoosePayment() {
   const location = useLocation();
@@ -7,6 +8,7 @@ function ChoosePayment() {
   const { room, startDate, endDate, filters } = state;
 
   const [creditCardNumber, setCreditCardNumber] = useState('');
+  const [customerSSNInput, setCustomerSSNInput] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [totalCost, setTotalCost] = useState(null); // State to hold the total cost
   const navigate = useNavigate();
@@ -27,13 +29,16 @@ function ChoosePayment() {
     setCreditCardNumber(inputCreditCardNumber);
   };
 
-  console.log("snn " + filters.employeeSSN)
+  let customerSSN = getCustomerSSN();
+  console.log("customer SSN: " + customerSSN)
 
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
 
     if (creditCardNumber.length !== 10) {
       setErrorMessage('Please input a valid 10-digit credit card number.');
+    } else if (customerSSNInput.trim() === '') {
+      setErrorMessage('Please input your customer SSN.');
     } else {
       try {
         // Send a POST request if the credit card number is valid
@@ -47,7 +52,7 @@ function ChoosePayment() {
             end_date: endDate,
             payment: totalCost,
             credit_card: creditCardNumber,
-            customer_ssn_sin: filters.employeeSSN,
+            customer_ssn_sin: customerSSNInput, // Use customerSSNInput instead of customerSSN
             hotel_id: filters.chainType,
             room_number: room.room_number
           }),
@@ -89,6 +94,15 @@ function ChoosePayment() {
             id="creditCardNumber"
             value={creditCardNumber}
             onChange={handleCreditCardChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="customerSSN">Customer SSN:</label>
+          <input
+            type="text"
+            id="customerSSN"
+            value={customerSSNInput}
+            onChange={(e) => setCustomerSSNInput(e.target.value)}
           />
         </div>
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
