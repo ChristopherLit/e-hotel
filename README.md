@@ -48,8 +48,8 @@ export default pool;
 ```
 
 ## populate with sample data
-after creating the local databse, create schema tables using queries from <db_init_queries/init_db.sql><br><br>
-then, populate with sample data from <db_init_queries/sample_data.sql><br><br>
+- create schema tables using queries from <db_init_queries/init_db.sql><br><br>
+- populate with sample data from <db_init_queries/sample_data.sql><br><br>
 
 ## to run
 frontend
@@ -60,5 +60,5 @@ backend
 ```bash
 node server.js
 ```
+run both the frontend and backend concurrently for this app to work
 open [http://localhost:5173/](http://localhost:5173/)
-
