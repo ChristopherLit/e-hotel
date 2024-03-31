@@ -3,11 +3,25 @@ Feiyu Lin #300298455 <br>
 Christopher Lit #300298516 <br>
 Ryan Guo #300294370
 
+# technologies used
+- javascript
+
+backend
+- postgresql (database)
+- node.js
+- express (server)
+
+frontend
+- html
+- react + vite
+
 # how to run
 ## install dependencies
+install the latest version of node.js
 ```bash
 npm install express pg cors react-router-dom
 ```
+
 
 ## create database
 open psql shell, login to local, and run the following
@@ -42,10 +56,9 @@ frontend
 ```bash
 npm run dev
 ```
-open [http://localhost:5173/](http://localhost:5173/)
-
 backend
 ```bash
 node server.js
 ```
+open [http://localhost:5173/](http://localhost:5173/)
 
