@@ -1,5 +1,5 @@
 import pool from '../../db.js';
-import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, room_query } from './queries.js';
+import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, room_query, insert_booking_query } from './queries.js';
 
 
 const get_hotel_chain = (req, res) => {
@@ -118,4 +118,15 @@ const get_rooms_by_filters = (req, res) => {
     });
 };
 
-export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn, get_rooms_by_filters };
+const process_payment = (req, res) => {
+    const { start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number } = req.body;
+
+    pool.query(insert_booking_query, [start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number], (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+        res.status(200).json({ message: 'Booking data inserted successfully.' });
+    });
+};
+
+export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn, get_rooms_by_filters, process_payment};

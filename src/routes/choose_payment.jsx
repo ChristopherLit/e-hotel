@@ -32,7 +32,7 @@ function ChoosePayment() {
 
         if (response.ok) {
           // Payment successful, navigate to another page
-          navigate('/success');
+          console.log("Success");
         } else {
           // Payment failed, display error message
           setErrorMessage('Payment failed. Please try again.');

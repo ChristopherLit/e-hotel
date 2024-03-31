@@ -1,5 +1,5 @@
 import express from 'express';
-import { get_hotel_chain, get_hotel_chain_by_id, get_hotel_chain_ids, get_hotel_by_filters, check_customer_ssn, check_employee_ssn, get_rooms_by_filters } from './controller.js';
+import { get_hotel_chain, get_hotel_chain_by_id, get_hotel_chain_ids, get_hotel_by_filters, check_customer_ssn, check_employee_ssn, get_rooms_by_filters, process_payment } from './controller.js';
 
 const router = express.Router();
 
