@@ -87,26 +87,22 @@ const get_rooms_by_filters = (req, res) => {
     let query = 'SELECT * FROM room WHERE true';
     let queryParams = [];
 
-    // Filter by hotel_id if it's not 'any'
-    if (hotel_id) {
+    if (hotel_id !== 'any') {
         query += ' AND hotel_id = $' + (queryParams.length + 1);
         queryParams.push(parseInt(hotel_id, 10));
     }
 
-    // Filter by price if it's not 'any'
-    if (price) {
+    if (price !== 'any') {
         query += ' AND price <= $' + (queryParams.length + 1);
         queryParams.push(parseInt(price, 10));
     }
 
-    // Filter by capacity if it's not 'any'
-    if (capacity) {
+    if (capacity !== 'any') {
         query += ' AND capacity = $' + (queryParams.length + 1);
         queryParams.push(parseInt(capacity, 10));
     }
 
-    // Filter by availability based on start and end dates if provided
-    if (startDate && endDate) {
+    if (startDate !== 'any' && endDate !== 'any') {
         query += ` AND room_number NOT IN (
             SELECT room_number FROM booking_renting 
             WHERE start_date <= $${queryParams.length + 2} AND end_date >= $${queryParams.length + 1}
@@ -121,7 +117,5 @@ const get_rooms_by_filters = (req, res) => {
         res.status(200).json(results.rows);
     });
 };
-
-
 
 export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn, get_rooms_by_filters };
