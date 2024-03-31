@@ -8,6 +8,11 @@ const insert_booking_query = 'INSERT INTO booking_renting (start_date, end_date,
 const hotel_chain_count_query = 'SELECT COUNT(*) AS total_hotel_chains FROM hotel_chain'
 const hotel_count_query = 'SELECT COUNT(*) AS total_hotels FROM hotel'
 const delete_booking_query = `DELETE FROM booking_renting WHERE customer_ssn_sin = $1 AND hotel_id = $2 AND room_number = $3`;
+const update_booking_query = `UPDATE booking_renting 
+                              SET credit_card = $1 
+                              WHERE customer_ssn_sin = $2 AND hotel_id = $3 AND room_number = $4`;
+
+
 
 export { hotel_chain_query, 
             hotel_chain_ids_query,
@@ -18,5 +23,6 @@ export { hotel_chain_query,
             insert_booking_query,
             hotel_chain_count_query,
             hotel_count_query,
-            delete_booking_query
+            delete_booking_query,
+            update_booking_query
 }
