@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ChooseHotel() {
   const location = useLocation();
   const filters = location.state ? location.state.filters : {};
   const [hotels, setHotels] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let chain_id = filters.chainType === "" ? "any" : filters.chainType;
@@ -19,9 +21,11 @@ function ChooseHotel() {
   }, [filters]);
 
   const handleBookClick = (hotel) => {
-    // Implement booking action for the selected hotel
+ 
     console.log(`Book button clicked for hotel: ${hotel.name}`);
-  };
+    navigate('/rooms', { state: { filters: filters, hotel: hotel } });
+
+  }
 
   return (
     <div>
@@ -50,5 +54,6 @@ function ChooseHotel() {
     </div>
   );
 }
+
 
 export default ChooseHotel;

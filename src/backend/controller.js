@@ -80,34 +80,51 @@ const check_employee_ssn = (req, res) => {
         res.status(200).json({ authorized });
     });
 };
-const get_rooms_by_filters = (req, res) => {
-    const { chain_id, address, rating } = req.params;
 
-    let query = room_query;
+const get_rooms_by_filters = (req, res) => {
+    const { hotel_id, price, capacity, startDate, endDate } = req.params;
+
+    let query = 'SELECT * FROM room WHERE true';
     let queryParams = [];
 
-    if (chain_id !== 'any') {
-        query += ' AND hotel_id IN (SELECT hotel_id FROM hotel WHERE chain_id = $' + (queryParams.length + 1) + ')';
-        queryParams.push(parseInt(chain_id, 10));
+    // Filter by hotel_id if it's not 'any'
+    if (hotel_id !== 'any') {
+        query += ' AND hotel_id = $' + (queryParams.length + 1);
+        queryParams.push(parseInt(hotel_id, 10));
     }
 
-    if (address !== 'any') {
-        query += ' AND hotel_id IN (SELECT hotel_id FROM hotel WHERE address LIKE $' + (queryParams.length + 1) + ')';
-        queryParams.push(`%${address}%`);
+    // Filter by price if it's not 'any'
+    if (price !== 'any') {
+        query += ' AND price <= $' + (queryParams.length + 1);
+        queryParams.push(parseInt(price, 10));
     }
 
-    if (rating !== 'any') {
-        query += ' AND hotel_id IN (SELECT hotel_id FROM hotel WHERE rating = $' + (queryParams.length + 1) + ')';
-        queryParams.push(parseInt(rating, 10));
+    // Filter by capacity if it's not 'any'
+    if (capacity !== 'any') {
+        query += ' AND capacity = $' + (queryParams.length + 1);
+        queryParams.push(parseInt(capacity, 10));
+    }
+
+    // Filter by availability based on start and end dates if provided
+    if (startDate && endDate) {
+        query += ` AND room_number NOT IN (
+            SELECT room_number FROM booking_renting 
+            WHERE (start_date <= $${queryParams.length + 1} AND end_date >= $${queryParams.length + 2}) 
+            OR (start_date >= $${queryParams.length + 1} AND end_date <= $${queryParams.length + 2}) 
+            OR (start_date <= $${queryParams.length + 1} AND end_date >= $${queryParams.length + 1}) 
+            OR (start_date <= $${queryParams.length + 2} AND end_date >= $${queryParams.length + 2})
+        )`;
+        queryParams.push(startDate, endDate);
     }
 
     pool.query(query, queryParams, (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        const authorized = results.rows.length > 0; 
-        res.status(200).json({ authorized });
+        res.status(200).json(results.rows);
     });
 };
 
-export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn,  get_rooms_by_filters};
+
+
+export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, check_employee_ssn, get_rooms_by_filters};
