@@ -135,7 +135,7 @@ const process_payment = (req, res) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        res.status(200).json({ message: 'Booking data inserted successfully.' });
+        res.status(201).json({ message: 'Booking data inserted successfully.' });
     });
 };
 

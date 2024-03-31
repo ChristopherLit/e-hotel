@@ -13,6 +13,25 @@ function ChoosePayment() {
   const [totalCost, setTotalCost] = useState(null); // State to hold the total cost
   const navigate = useNavigate();
 
+  const handleSSNChange = (event) => {
+    const inputSSN = event.target.value;
+    setCustomerSSNInput(inputSSN);
+    // Clear the error message when the user updates the SSN
+    if (errorMessage) {
+      setErrorMessage('');
+    }
+  };
+
+  const handleCreditCardChange = (event) => {
+    const inputCreditCardNumber = event.target.value;
+    setCreditCardNumber(inputCreditCardNumber);
+    // Clear the error message when the user updates the credit card number
+    if (errorMessage) {
+      setErrorMessage('');
+    }
+  };
+
+
   useEffect(() => {
     if (startDate && endDate && room && room.price) {
       const start = new Date(startDate);
@@ -24,11 +43,6 @@ function ChoosePayment() {
     }
   }, [startDate, endDate, room]);
 
-  const handleCreditCardChange = (event) => {
-    const inputCreditCardNumber = event.target.value;
-    setCreditCardNumber(inputCreditCardNumber);
-  };
-
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
 
@@ -36,8 +50,22 @@ function ChoosePayment() {
       setErrorMessage('Please input a valid 10-digit credit card number.');
     } else if (customerSSNInput.trim() === '') {
       setErrorMessage('Please input your customer SSN.');
-    } else {
+    } 
+    else {
       try {
+        // Check if the customer SSN exists in the database
+        const ssnResponse = await fetch(`http://localhost:3000/api/check/ssncustomer/${customerSSNInput}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const ssnData = await ssnResponse.json();
+
+        if (!ssnData.authorized) {
+          setErrorMessage('Customer SSN is not registered in the database. Please create a customer account first.');
+          return;
+        }
         
         // Send a POST request if the credit card number is valid
         const response = await fetch('http://localhost:3000/api/payment', {
@@ -104,7 +132,7 @@ function ChoosePayment() {
             type="text"
             id="customerSSN"
             value={customerSSNInput}
-            onChange={(e) => setCustomerSSNInput(e.target.value)}
+            onChange={handleSSNChange}
           />
         </div>
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
