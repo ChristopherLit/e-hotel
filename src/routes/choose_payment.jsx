@@ -1,42 +1,35 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function ChoosePayment() {
   const location = useLocation();
-  const { filters, hotel, room, startDate, endDate } = location.state;
+  const { state } = location;
+  const { room, startDate, endDate, filters } = state;
+
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [totalCost, setTotalCost] = useState(null); // State to hold the total cost
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (startDate && endDate && room && room.price) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const timeDifference = end.getTime() - start.getTime();
+      const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Calculate the number of days
+      const totalCost = daysDifference * room.price; // Calculate the total cost
+      setTotalCost(totalCost); // Update the state with the total cost
+    }
+  }, [startDate, endDate, room]);
 
   const handleCreditCardChange = (event) => {
     const inputCreditCardNumber = event.target.value;
     setCreditCardNumber(inputCreditCardNumber);
   };
 
-//   datePicker: "",
-//   roomCapacity: "",
-//   chainType: "",
-//   priceSlider: "",
-//   city: "",
-//   star: "",
-//   start_date, end_date, payment, credit_card, employee_ssn_sin, hotel_id, room_number 
-
-const handlePaymentSubmit = async (event) => {
+  const handlePaymentSubmit = async (event) => {
     event.preventDefault();
-  
-    let chain_id = filters.chainType === "" ? "any" : filters.chainType;
-    // let startDate = "any";
-    // let endDate = "any";
-  
-    // if (datePicker !== "any") {
-    //   const [startStr, endStr] = datePicker.split(" - ");
-    //   const [startDay, startMonth, startYear] = startStr.split("/");
-    //   const [endDay, endMonth, endYear] = endStr.split("/");
-    //   startDate = `${startYear}-${startMonth}-${startDay}`;
-    //   endDate = `${endYear}-${endMonth}-${endDay}`;
-    // }
-  
+
     if (creditCardNumber.length !== 10) {
       setErrorMessage('Please input a valid 10-digit credit card number.');
     } else {
@@ -50,14 +43,14 @@ const handlePaymentSubmit = async (event) => {
           body: JSON.stringify({
             start_date: startDate,
             end_date: endDate,
-            payment: room.price,
+            payment: totalCost,
             credit_card: creditCardNumber,
             employee_ssn_sin: filters.employeeSSN,
-            hotel_id: chain_id,
+            hotel_id: filters.chainType,
             room_number: room.room_number
           }),
         });
-  
+
         if (response.ok) {
           // Payment successful, navigate to another page
           console.log("Success");
@@ -72,17 +65,19 @@ const handlePaymentSubmit = async (event) => {
       }
     }
   };
-  
-  
 
   return (
     <div>
       <h1>Choose Payment</h1>
       <div>
         <h2>Applied Filters</h2>
-        <p><strong>Hotel ID:</strong> {hotel.hotel_id !== undefined ? hotel.hotel_id : ''}</p>
-        <p><strong>Price:</strong> {filters.priceSlider !== undefined ? filters.priceSlider : ''}</p>
-        <p><strong>Capacity:</strong> {filters.roomCapacity !== undefined ? filters.roomCapacity : ''}</p>
+        <p><strong>Hotel ID:</strong> {filters.chainType}</p> {/* Assuming chainType represents hotel_id */}
+        <p><strong>Price:</strong> {room.price}</p>
+        <p><strong>Capacity:</strong> {filters.roomCapacity}</p>
+      </div>
+      <div>
+        <h2>Total Cost</h2>
+        <p>{totalCost !== null ? `$${totalCost}` : 'Calculating...'}</p> {/* Display total cost */}
       </div>
       <form onSubmit={handlePaymentSubmit}>
         <div>

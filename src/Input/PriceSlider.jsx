@@ -11,7 +11,7 @@ const PriceSlider = ({onSelect}) => {
 
   return (
     <div>
-      <label htmlFor="price">Max Price:</label>
+      <label htmlFor="price">Max Price Per Night:</label>
       {/* Slider input element */}
       <input
         type="range"

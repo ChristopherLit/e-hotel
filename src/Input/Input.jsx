@@ -30,7 +30,15 @@ function Input() {
   };
 
   const applyFilter = () => {
-    navigate('/hotels', { state: { filters: selectedFilters } });
+
+    if (!selectedFilters.datePicker || selectedFilters.datePicker === "") {
+      alert("Please select a date range.");
+      
+    } else {
+
+      navigate('/hotels', { state: { filters: selectedFilters } });
+    }
+    
   }
 
   return (
