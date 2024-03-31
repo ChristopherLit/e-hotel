@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { useNavigate } from 'react-router-dom';
 import { setCustomerSSN, setEmployeeSSN } from '../Input/globalSSN';
 
 function SignIn() {
@@ -30,16 +30,16 @@ function SignIn() {
       .then(response => response.json())
       .then(data => {
         if (data.authorized) {
-          // Set the SSN based on the role
+          // Set the SSN based on the role and redirect to the appropriate page
           if (role === 'customer') {
             setCustomerSSN(ssn);
+            navigate('/input');
           } else if (role === 'employee') {
             setEmployeeSSN(ssn);
+            navigate('/employee_homepage');
           }
-          // Redirect to another page
-          navigate('/input');
+          
         } else {
-          // SSN is not found, display an error message
           setErrorMessage('You are not authorized to log in.');
         }
       })
