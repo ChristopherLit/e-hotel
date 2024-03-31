@@ -86,9 +86,6 @@ const check_employee_ssn = (req, res) => {
 const get_rooms_by_filters = (req, res) => {
     const { hotel_id, price, capacity, startDate, endDate } = req.params;
 
-    console.log("dates")
-    console.log(startDate, endDate);
-
     let query = 'SELECT * FROM room WHERE true';
     let queryParams = [];
 
@@ -115,10 +112,6 @@ const get_rooms_by_filters = (req, res) => {
         queryParams.push(startDate, endDate);
     }
 
-    console.log("hjere")
-    console.log('query:', query);
-    console.log('queryParams:', queryParams);
-
     pool.query(query, queryParams, (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
@@ -130,13 +123,13 @@ const get_rooms_by_filters = (req, res) => {
 const process_payment = (req, res) => {
     const { start_date, end_date, payment, credit_card, customer_ssn_sin, hotel_id, room_number } = req.body;
     
-    console.log('start_date:', start_date);
-    console.log('end_date:', end_date);
-    console.log('payment:', payment);
-    console.log('credit_card:', credit_card);
-    console.log('customer_ssn_sin:', customer_ssn_sin);
-    console.log('hotel_id:', hotel_id);
-    console.log('room_number:', room_number);
+    // console.log('start_date:', start_date);
+    // console.log('end_date:', end_date);
+    // console.log('payment:', payment);
+    // console.log('credit_card:', credit_card);
+    // console.log('customer_ssn_sin:', customer_ssn_sin);
+    // console.log('hotel_id:', hotel_id);
+    // console.log('room_number:', room_number);
     
     pool.query(insert_booking_query, [start_date, end_date, payment, credit_card, customer_ssn_sin, hotel_id, room_number], (error, results) => {
         if (error) {

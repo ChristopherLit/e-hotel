@@ -44,7 +44,6 @@ function ChooseRoom() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setRooms(data);
       })
       .catch((error) => {
