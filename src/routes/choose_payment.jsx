@@ -38,14 +38,6 @@ function ChoosePayment() {
       setErrorMessage('Please input your customer SSN.');
     } else {
       try {
-
-        console.log('start_date:', startDate);
-        console.log('end_date:', endDate);
-        console.log('payment:', totalCost);
-        console.log('credit_card:', creditCardNumber);
-        console.log('customer_ssn_sin:', customerSSNInput);
-        console.log('hotel_id:', hotel_id);
-        console.log('room_number:', room.room_number);
         
         // Send a POST request if the credit card number is valid
         const response = await fetch('http://localhost:3000/api/payment', {
