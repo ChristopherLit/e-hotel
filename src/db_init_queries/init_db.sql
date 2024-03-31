@@ -93,10 +93,9 @@ CREATE TABLE customer (
 -- Create the 'booking_renting' table
 CREATE TABLE booking_renting (
     booking_renting_id SERIAL PRIMARY KEY,
- 
     start_date DATE,
     end_date DATE,
-    payment NUMERIC, -- Amount
+    payment INT, -- Amount
     credit_card BIGINT,
     customer_ssn_sin INT,
     hotel_id INT,

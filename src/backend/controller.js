@@ -122,6 +122,13 @@ const get_rooms_by_filters = (req, res) => {
 const process_payment = (req, res) => {
     const { start_date, end_date, payment, credit_card, customer_ssn_sin, hotel_id, room_number } = req.body;
     
+    console.log('start_date:', start_date);
+    console.log('end_date:', end_date);
+    console.log('payment:', payment);
+    console.log('credit_card:', credit_card);
+    console.log('customer_ssn_sin:', customer_ssn_sin);
+    console.log('hotel_id:', hotel_id);
+    console.log('room_number:', room_number);
     
     pool.query(insert_booking_query, [start_date, end_date, payment, credit_card, customer_ssn_sin, hotel_id, room_number], (error, results) => {
         if (error) {

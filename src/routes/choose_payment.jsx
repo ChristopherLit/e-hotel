@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getCustomerSSN } from '../Input/globalSSN';
+import { getCustomerSSN, setCustomerSSN, setEmployeeSSN } from '../Input/globalSSN';
 
 function ChoosePayment() {
   const location = useLocation();
@@ -32,21 +32,21 @@ function ChoosePayment() {
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
 
-    console.log('start_date:', startDate);
-console.log('end_date:', endDate);
-console.log('payment:', totalCost);
-console.log('credit_card:', creditCardNumber);
-console.log('customer_ssn_sin:', customerSSNInput);
-console.log('hotel_id:', hotel_id);
-console.log('room_number:', room.room_number);
-
-
     if (creditCardNumber.length !== 10) {
       setErrorMessage('Please input a valid 10-digit credit card number.');
     } else if (customerSSNInput.trim() === '') {
       setErrorMessage('Please input your customer SSN.');
     } else {
       try {
+
+        console.log('start_date:', startDate);
+        console.log('end_date:', endDate);
+        console.log('payment:', totalCost);
+        console.log('credit_card:', creditCardNumber);
+        console.log('customer_ssn_sin:', customerSSNInput);
+        console.log('hotel_id:', hotel_id);
+        console.log('room_number:', room.room_number);
+        
         // Send a POST request if the credit card number is valid
         const response = await fetch('http://localhost:3000/api/payment', {
           method: 'POST',
@@ -65,8 +65,12 @@ console.log('room_number:', room.room_number);
         });
 
         if (response.ok) {
-          // Payment successful, navigate to another page
-          console.log("Success");
+          
+          alert("Payment was successful!");
+            setEmployeeSSN(-1);
+            setCustomerSSN(-1);
+            navigate('/');
+
         } else {
           // Payment failed, display error message
           setErrorMessage('Payment failed. Please try again.');
