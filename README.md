@@ -60,5 +60,5 @@ backend
 ```bash
 node server.js
 ```
-run both the frontend and backend concurrently for this app to work
+run both the frontend and backend concurrently for this app to work <br>
 open [http://localhost:5173/](http://localhost:5173/)
