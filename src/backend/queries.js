@@ -11,7 +11,12 @@ const delete_booking_query = `DELETE FROM booking_renting WHERE customer_ssn_sin
 const update_booking_query = `UPDATE booking_renting 
                               SET credit_card = $1 
                               WHERE customer_ssn_sin = $2 AND hotel_id = $3 AND room_number = $4`;
-
+const view_rooms_per_area_query = `
+                              CREATE VIEW rooms_per_area AS
+                              SELECT city, COUNT(*) AS num_rooms
+                              FROM room
+                              GROUP BY city;
+                            `;
 
 
 export { hotel_chain_query, 
@@ -24,5 +29,6 @@ export { hotel_chain_query,
             hotel_chain_count_query,
             hotel_count_query,
             delete_booking_query,
-            update_booking_query
+            update_booking_query,
+            view_rooms_per_area_query
 }

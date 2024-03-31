@@ -1,4 +1,3 @@
-// Input.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DateRangePicker from "./DateRangePicker";
@@ -7,7 +6,6 @@ import ChainTypeDropdown from "./ChainTypeDropdown";
 import PriceSlider from "./PriceSlider";
 import CityDropdown from "./CityDropdown";
 import StarDropdown from "./StarDropdown";
-// import NumberOfRoomsPicker from "./NumberOfRoomsPicker"
 
 function Input() {
   const [selectedFilters, setSelectedFilters] = useState({
@@ -17,11 +15,17 @@ function Input() {
     priceSlider: "",
     city: "",
     star: "",
-    //numberOfRooms: "",
   });
 
   const [hotelChainCount, setHotelChainCount] = useState(0);
   const [hotelCount, setHotelCount] = useState(0);
+  const [roomCounts, setRoomCounts] = useState({
+    "New York": 0,
+    "Los Angeles": 0,
+    "Chicago": 0,
+    "Houston": 0,
+    "Miami": 0
+  });
 
   useEffect(() => {
     fetch("http://localhost:3000/api/hotelchain/count")
@@ -34,6 +38,13 @@ function Input() {
       .then((response) => response.json())
       .then((data) => {
         setHotelCount(data[0].total_hotels);
+      });
+
+    // Fetch room counts per area
+    fetch("http://localhost:3000/api/roomCounts")
+      .then((response) => response.json())
+      .then((data) => {
+        setRoomCounts(data);
       });
   }, []);
 
@@ -68,6 +79,10 @@ function Input() {
         diverse selection guarantees a memorable stay tailored to your
         preferences.
       </p>
+      <h3>Number of Rooms per Area:</h3>
+      {Object.entries(roomCounts).map(([area, count]) => (
+        <p key={area}>{area}: {count}</p>
+      ))}
       <DateRangePicker
         onSelect={(value) => handleSelect("datePicker", value)}
       />
@@ -80,7 +95,6 @@ function Input() {
       <PriceSlider onSelect={(value) => handleSelect("priceSlider", value)} />
       <CityDropdown onSelect={(value) => handleSelect("city", value)} />
       <StarDropdown onSelect={(value) => handleSelect("star", value)} />
-      {/* <NumberOfRoomsPicker onSelect={(value) => handleSelect("numberOfRooms", value)} /> */}
       <button onClick={applyFilter}>Filter</button>
     </div>
   );
