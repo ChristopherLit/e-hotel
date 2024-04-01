@@ -17,14 +17,14 @@ function ChooseHotel() {
       const response = await fetch(`http://localhost:3000/api/hotel/${chain_id}/${address}/${rating}`);
       const data = await response.json();
       setHotels(data);
+      // Fetch aggregated capacity for each hotel
+      data.forEach(hotel => {
+        fetchAggregatedCapacity(hotel.hotel_id);
+      });
     };
 
     fetchHotels();
   }, []);
-
-  useEffect(() => {
-    hotels.forEach(hotel => fetchAggregatedCapacity(hotel.hotel_id));
-  }, [hotels]);
 
   const fetchAggregatedCapacity = async (hotelID) => {
     try {
