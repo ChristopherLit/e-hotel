@@ -18,6 +18,6 @@ router.post('/check/ssncustomer/:ssn', check_customer_ssn);
 router.post('/payment', process_payment);
 router.post('/delete', delete_booking)
 router.post('/update', update_booking)
-router.get('/roomCounts', get_rooms_per_area)
+router.post('/roomCounts', get_rooms_per_area)
 
 export default router;

@@ -19,13 +19,7 @@ function Input() {
 
   const [hotelChainCount, setHotelChainCount] = useState(0);
   const [hotelCount, setHotelCount] = useState(0);
-  const [roomCounts, setRoomCounts] = useState({
-    "New York": 0,
-    "Los Angeles": 0,
-    "Chicago": 0,
-    "Houston": 0,
-    "Miami": 0
-  });
+  const [roomCounts, setRoomCounts] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/hotelchain/count")
@@ -41,12 +35,28 @@ function Input() {
       });
 
     // Fetch room counts per area
-    fetch("http://localhost:3000/api/roomCounts")
-      .then((response) => response.json())
-      .then((data) => {
-        setRoomCounts(data);
-      });
+    fetchRoomCounts();
   }, []);
+
+  const fetchRoomCounts = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/roomCounts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setRoomCounts(data);
+      } else {
+        throw new Error("Failed to fetch room counts");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -80,8 +90,8 @@ function Input() {
         preferences.
       </p>
       <h3>Number of Rooms per Area:</h3>
-      {Object.entries(roomCounts).map(([area, count]) => (
-        <p key={area}>{area}: {count}</p>
+      {roomCounts.map(({ city, num_rooms }) => (
+        <p key={city}>{city}: {num_rooms}</p>
       ))}
       <DateRangePicker
         onSelect={(value) => handleSelect("datePicker", value)}

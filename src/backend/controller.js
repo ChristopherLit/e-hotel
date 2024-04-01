@@ -197,9 +197,12 @@ const update_booking = (req, res) => {
 const get_rooms_per_area = (req, res) => {
     // Execute the query
     pool.query(view_rooms_per_area_query, (error, results) => {
+
         if (error) {
             return res.status(500).json({ error: error.message });
         }
+
+        
         // Return the results from the view
         res.status(200).json(results.rows);
     });
@@ -210,6 +213,7 @@ const get_hotel_cities = (req, res) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
+     
         res.status(200).json(results.rows);
     });
 };
