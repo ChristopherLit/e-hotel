@@ -51,6 +51,7 @@ function SignIn() {
 
   return (
     <div>
+      <h1>LOGIN</h1>
       {showInput && (
         <div>
           <button onClick={() => handleButtonClick('customer')}>Customer</button>

@@ -47,10 +47,10 @@ const pool = new Pool({
 export default pool;
 ```
 
-## populate with sample data and insert indexing for better performance
-- create schema tables using queries from <db_init_queries/init_db.sql><br><br>
-- populate with sample data from <db_init_queries/sample_data.sql><br><br>
-- run index commands from <db_init_queries/db_indexing.sql>
+## setup for your local database 
+- head to the [<db_init_queries>](https://github.com/ChristopherLit/e-hotel/tree/main/src/db_init_queries) folder to access all the SQL code needed to setup the database
+- you can copy paste the SQL code straight into your psql shell
+- you MUST execute <init_db.sql> first and <sample_data.sql> last. The other files can be executed in any order
 
 ## to run
 frontend
@@ -62,4 +62,4 @@ backend
 node server.js
 ```
 run both the frontend and backend concurrently for this app to work <br>
-open [http://localhost:5173/](http://localhost:5173/)
+open [http://localhost:5173/](http://localhost:5173/) to access our ehotel web app
