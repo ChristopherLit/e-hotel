@@ -159,23 +159,23 @@ const get_hotel_count = (req, res) => {
 };
 
 const delete_booking = (req, res) => {
-    const { customer_ssn, hotel_id, room_number } = req.body;
-    
-
-    pool.query(delete_booking_query, [customer_ssn, hotel_id, room_number], (error, results) => {
+    const booking_renting_id = parseInt(req.params.booking_renting_id);
+    console.log('booking_renting_id:', booking_renting_id);
+    pool.query(delete_booking_query, [booking_renting_id], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        
-        if (results.rowCount === 1) {
-            // Booking successfully deleted
-            res.status(200).json({ deleted: true });
-        } else {
+
+        if (results.rowCount === 0) {
             // Booking not found or already deleted
             res.status(404).json({ deleted: false });
+        } else {
+            // Booking successfully deleted
+            res.status(200).json({ deleted: true });
         }
     });
 };
+
 
 const update_booking = (req, res) => {
     const { customer_ssn, hotel_id, room_number, credit_card } = req.body;

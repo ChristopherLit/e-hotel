@@ -17,8 +17,9 @@ router.post('/revenue', getTotalRevenue);
 router.post('/check/ssnemployee/:ssn', check_employee_ssn);
 router.post('/check/ssncustomer/:ssn', check_customer_ssn);
 router.post('/payment', process_payment);
-router.post('/delete', delete_booking)
 router.post('/update', update_booking)
 router.post('/create/customer', create_customer_account);
+
+router.delete('/delete/:booking_renting_id', delete_booking)
 
 export default router;
