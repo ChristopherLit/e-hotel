@@ -1,7 +1,8 @@
 import pool from '../../db.js';
 import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, 
-    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query, delete_booking_query, update_booking_query, view_rooms_per_area_query, get_hotel_cities_query, get_aggregatedCapacity_query,
-    create_customer_query } from './queries.js';
+    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query, delete_booking_query, 
+    update_booking_query, view_rooms_per_area_query, get_hotel_cities_query, get_aggregatedCapacity_query,
+    create_customer_query, revenue_query } from './queries.js';
 
 
 const get_hotel_chain = (req, res) => {
