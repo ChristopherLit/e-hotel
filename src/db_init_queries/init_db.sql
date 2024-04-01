@@ -104,3 +104,8 @@ CREATE TABLE booking_renting (
     FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id),
     FOREIGN KEY (room_number) REFERENCES room(room_number)
 );
+
+CREATE TABLE total_revenue (
+    id SERIAL PRIMARY KEY,
+    revenue BIGINT
+);

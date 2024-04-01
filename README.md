@@ -47,9 +47,10 @@ const pool = new Pool({
 export default pool;
 ```
 
-## populate with sample data
+## populate with sample data and insert indexing for better performance
 - create schema tables using queries from <db_init_queries/init_db.sql><br><br>
 - populate with sample data from <db_init_queries/sample_data.sql><br><br>
+- run index commands from <db_init_queries/db_indexing.sql>
 
 ## to run
 frontend

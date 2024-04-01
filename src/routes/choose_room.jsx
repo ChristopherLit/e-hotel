@@ -21,17 +21,18 @@ function ChooseRoom() {
     return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
   };
 
-  useEffect(() => {
-    const validateParam = (param) => (param && !isNaN(param) ? param : "any");
-
-    const capacity = validateParam(filters.roomCapacity);
-    const price = validateParam(filters.priceSlider);
-    const startDate = filters.datePicker
+  const startDate = filters.datePicker
     ? formatDate(filters.datePicker.split("-")[0])
     : "any";
   const endDate = filters.datePicker
     ? formatDate(filters.datePicker.split("-")[1])
     : "any";
+
+  useEffect(() => {
+    const validateParam = (param) => (param && !isNaN(param) ? param : "any");
+
+    const capacity = validateParam(filters.roomCapacity);
+    const price = validateParam(filters.priceSlider);
 
     // Fetch rooms based on the provided filters
     fetch(
@@ -53,7 +54,7 @@ function ChooseRoom() {
 
   const handleBookClick = (room) => {
     console.log("hotel ID: " + hotel_id); // Access hotel_id here
-    navigate('/payment', { state: { filters: filters, hotel: hotel, room: room, startDate: parsedStartDate, endDate: parsedEndDate, hotel_id: hotel_id } });
+    navigate('/payment', { state: { filters: filters, hotel: hotel, room: room, startDate: startDate, endDate: endDate, hotel_id: hotel_id } });
   };
 
   return (

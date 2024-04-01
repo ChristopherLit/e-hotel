@@ -1,7 +1,7 @@
 import pool from '../../db.js';
 import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, 
-    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query, delete_booking_query, update_booking_query, view_rooms_per_area_query, get_hotel_cities_query, get_aggregatedCapacity_query } from './queries.js';
-
+    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query, delete_booking_query, update_booking_query, 
+        view_rooms_per_area_query, get_hotel_cities_query, get_aggregatedCapacity_query, revenue_query } from './queries.js';
 
 const get_hotel_chain = (req, res) => {
     pool.query(hotel_chain_query, (error, results) => {
@@ -135,7 +135,7 @@ const process_payment = (req, res) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        res.status(200).json({ message: 'Booking data inserted successfully.' });
+        res.status(201).json({ message: 'Booking data inserted successfully.' });
     });
 };
 
@@ -158,23 +158,22 @@ const get_hotel_count = (req, res) => {
 };
 
 const delete_booking = (req, res) => {
-    const { customer_ssn, hotel_id, room_number } = req.body;
-    
-
-    pool.query(delete_booking_query, [customer_ssn, hotel_id, room_number], (error, results) => {
+    const booking_renting_id = parseInt(req.params.booking_renting_id);
+    pool.query(delete_booking_query, [booking_renting_id], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        
-        if (results.rowCount === 1) {
-            // Booking successfully deleted
-            res.status(200).json({ deleted: true });
-        } else {
+
+        if (results.rowCount === 0) {
             // Booking not found or already deleted
             res.status(404).json({ deleted: false });
+        } else {
+            // Booking successfully deleted
+            res.status(200).json({ deleted: true });
         }
     });
 };
+
 
 const update_booking = (req, res) => {
     const { customer_ssn, hotel_id, room_number, credit_card } = req.body;
@@ -227,8 +226,37 @@ const get_aggregatedCapacity = (req, res) => {
         }
         // Return the aggregated capacity
         res.status(200).json({ aggregatedCapacity: results.rows[0].aggregated_capacity });
+
+const create_customer_account = (req, res) => {
+    const { customer_ssn_sin, first_name, last_name } = req.body;
+    const currentDate = new Date().toISOString().slice(0, 10);
+    pool.query(customer_ssn_query, [customer_ssn_sin], (error, results) => {
+        if (results.rows.length) {
+            res.status(400).json({ message: 'Customer account already exists.' });
+        }
+        else
+        {
+            pool.query(create_customer_query, [customer_ssn_sin, first_name, last_name, currentDate], (error, results) => {
+                if (error) {
+                    return res.status(500).json({ error: error.message });
+                }
+                res.status(201).json({ message: 'Customer account created successfully.' });
+            });
+        }
+    });
+};
+
+const getTotalRevenue = (req, res) => {
+    pool.query(revenue_query, (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+
+        const totalRevenue = results.rows.length > 0 ? results.rows[0].revenue : 0;
+        res.status(200).json({ totalRevenue });
     });
 };
 
 export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, 
-    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, get_hotel_count, delete_booking, update_booking,  get_rooms_per_area, get_hotel_cities, get_aggregatedCapacity};
+    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, get_hotel_count, delete_booking, update_booking,
+  get_rooms_per_area, get_hotel_cities, get_aggregatedCapacity, create_customer_account, getTotalRevenue};
