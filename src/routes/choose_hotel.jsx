@@ -20,12 +20,39 @@ function ChooseHotel() {
       });
   }, [filters]);
 
-  const handleBookClick = (hotel) => {
- 
-    console.log(`Book button clicked for hotel: ${hotel.name}`);
-    console.log(filters, hotel);
-    navigate('/rooms', { state: { filters: filters, hotel: hotel} });
+  const handleAggregatedCapacity  (hotelID) => {
+   
+    try {
+      const response = await fetch('http://localhost:3000/api/aggregatedCapacity', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ hotel_id: hotelID }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log('Aggregated capacity for hotel', hotelID, ':', data.aggregatedCapacity);
+        // Do something with the aggregated capacity
+      } else {
+        console.error('Failed to fetch aggregated capacity for hotel', hotelID, ':', data.error);
+        // Handle error message
+      }
+    } catch (error) {
+      console.error('Error fetching aggregated capacity for hotel', hotelID, ':', error);
+      // Handle error message
+    }
+  };
 
+  const handleBookClick = async (hotel) => {
+    try {
+      // Navigate to rooms page with filters, hotel data
+      navigate('/rooms', { state: { filters: filters, hotel: hotel } });
+    } catch (error) {
+      console.error('Error handling book click:', error);
+    }
   }
 
   return (
@@ -48,6 +75,7 @@ function ChooseHotel() {
             <p><strong>Address:</strong> {hotel.address}</p>
             <p><strong>Rating:</strong> {hotel.rating}</p>
             <p><strong>Max rooms:</strong> {hotel.number_of_rooms}</p>
+            <p><strong>Aggregated Capacity:</strong> {handleAggregatedCapacity(hotel.id)}</p>
             <button onClick={() => handleBookClick(hotel)}>Book</button>
           </div>
         ))}
@@ -55,6 +83,5 @@ function ChooseHotel() {
     </div>
   );
 }
-
 
 export default ChooseHotel;

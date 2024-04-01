@@ -19,6 +19,12 @@ LEFT JOIN room r ON h.hotel_id = r.hotel_id
 GROUP BY h.address
 ORDER BY city;
                             `;
+const get_aggregatedCapacity_query = `
+SELECT SUM(capacity) AS aggregated_capacity
+FROM room
+WHERE hotel_id = $1;
+`;
+
 
 
 export { hotel_chain_query, 
@@ -33,5 +39,6 @@ export { hotel_chain_query,
             delete_booking_query,
             update_booking_query,
             view_rooms_per_area_query,
-            get_hotel_cities_query
+            get_hotel_cities_query,
+            get_aggregatedCapacity_query
 }
