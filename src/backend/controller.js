@@ -220,7 +220,7 @@ const getTotalRevenue = (req, res) => {
             return res.status(500).json({ error: error.message });
         }
 
-        const totalRevenue = results.rows.length > 0 ? results.rows[0].total_revenue : 0;
+        const totalRevenue = results.rows.length > 0 ? results.rows[0].revenue : 0;
         res.status(200).json({ totalRevenue });
     });
 };

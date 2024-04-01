@@ -12,7 +12,7 @@ const update_booking_query = `UPDATE booking_renting
                               SET credit_card = $1 
                               WHERE customer_ssn_sin = $2 AND hotel_id = $3 AND room_number = $4`;
 const create_customer_query = `INSERT INTO customer (customer_ssn_sin, first_name, last_name, registration_date) VALUES ($1, $2, $3, $4)`;
-const revenue_query = `SELECT SUM(payment) AS total_revenue FROM booking_renting`;
+const revenue_query = `SELECT revenue FROM total_revenue where id = 1`;
 
 
 export { hotel_chain_query, 
