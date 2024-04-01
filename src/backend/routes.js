@@ -12,8 +12,8 @@ router.get('/hotel/:chain_id/:address/:rating', get_hotel_by_filters);
 router.get('/rooms/:hotel_id/:price/:capacity/:startDate/:endDate', get_rooms_by_filters);
 router.get('/hotelchain/count', get_hotel_chain_count);
 router.get('/hotel/count', get_hotel_count);
-router.post('/revenue', getTotalRevenue);
 
+router.post('/revenue', getTotalRevenue);
 router.post('/check/ssnemployee/:ssn', check_employee_ssn);
 router.post('/check/ssncustomer/:ssn', check_customer_ssn);
 router.post('/payment', process_payment);

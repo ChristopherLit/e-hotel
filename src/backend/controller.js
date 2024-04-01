@@ -215,9 +215,7 @@ const create_customer_account = (req, res) => {
 };
 
 const getTotalRevenue = (req, res) => {
-    const query = 'SELECT SUM(payment) AS total_revenue FROM booking_renting';
-
-    pool.query(query, (error, results) => {
+    pool.query(revenue_query, (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
