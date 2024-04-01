@@ -50,6 +50,7 @@ function Input() {
       if (response.ok) {
         const data = await response.json();
         setRoomCounts(data);
+        console.log(data);
       } else {
         throw new Error("Failed to fetch room counts");
       }
@@ -90,9 +91,10 @@ function Input() {
         preferences.
       </p>
       <h3>Number of Rooms per Area:</h3>
-      {roomCounts.map(({ city, num_rooms }) => (
-        <p key={city}>{city}: {num_rooms}</p>
-      ))}
+      {roomCounts.map(({ full_address, num_rooms }, index) => (
+  <p key={index}>{full_address}: {num_rooms}</p>
+))}
+
       <DateRangePicker
         onSelect={(value) => handleSelect("datePicker", value)}
       />

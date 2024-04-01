@@ -218,6 +218,7 @@ const get_rooms_per_area = (req, res) => {
     // Execute the query
     pool.query(view_rooms_per_area_query, (error, results) => {
 
+        console.log("here:" + results.rows);
         if (error) {
             return res.status(500).json({ error: error.message });
         }
