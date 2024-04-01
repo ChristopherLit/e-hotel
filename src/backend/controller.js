@@ -196,9 +196,9 @@ const delete_booking = (req, res) => {
 };
 
 const update_booking = (req, res) => {
-    const { customer_ssn, hotel_id, room_number, credit_card } = req.body;
+    const { booking_renting_id, credit_card } = req.body;
     
-    pool.query(update_booking_query, [credit_card, customer_ssn, hotel_id, room_number], (error, results) => {
+    pool.query(update_booking_query, [credit_card, booking_renting_id], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
