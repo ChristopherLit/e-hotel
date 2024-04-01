@@ -47,7 +47,7 @@ function ChooseHotel() {
             <h3>{hotel.name}</h3>
             <p><strong>Address:</strong> {hotel.address}</p>
             <p><strong>Rating:</strong> {hotel.rating}</p>
-            <p><strong>Number of Rooms:</strong> {hotel.number_of_rooms}</p>
+            <p><strong>Max rooms:</strong> {hotel.number_of_rooms}</p>
             <button onClick={() => handleBookClick(hotel)}>Book</button>
           </div>
         ))}
