@@ -35,9 +35,9 @@ function ChooseHotel() {
         },
         body: JSON.stringify({ hotel_id: hotelID }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         setHotels(prevHotels => prevHotels.map(hotel => {
           if (hotel.hotel_id === hotelID) {
