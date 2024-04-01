@@ -32,14 +32,14 @@ function SystemInfo() {
       }
     }
 
-    getTotalRevenue(); // Call the function to fetch total revenue
+    getTotalRevenue();
   }, []);
 
   return (
     <div>
       <h1>System Info</h1>
       <p>Total revenue: {totalRevenue}</p>
-      {/* Display any other system info as needed */}
+    
     </div>
   );
 }
