@@ -13,16 +13,13 @@ const update_booking_query = `UPDATE booking_renting
                               SET credit_card = $1 
                               WHERE customer_ssn_sin = $2 AND hotel_id = $3 AND room_number = $4`;
 
-const view_rooms_per_area_query = `
-SELECT h.address AS city, COUNT(r.room_number) AS num_rooms
-FROM hotel h
-LEFT JOIN room r ON h.hotel_id = r.hotel_id
-GROUP BY h.address
-ORDER BY city;
-                            `;
+const view_rooms_per_area_query = 'SELECT full_address, num_rooms FROM rooms_per_city';
+;
+// const get_aggregatedCapacity_query = `SELECT * FROM aggregated_capacity_per_hotel`;
+
 const get_aggregatedCapacity_query = `
-SELECT SUM(capacity) AS aggregated_capacity
-FROM room
+SELECT COALESCE(aggregated_capacity, 0) AS aggregated_capacity
+FROM aggregated_capacity_per_hotel
 WHERE hotel_id = $1;
 `;
 

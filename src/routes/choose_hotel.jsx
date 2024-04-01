@@ -28,17 +28,12 @@ function ChooseHotel() {
 
   const fetchAggregatedCapacity = async (hotelID) => {
     try {
-      const response = await fetch('http://localhost:3000/api/aggregatedCapacity', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ hotel_id: hotelID }),
+      const response = await fetch(`http://localhost:3000/api/aggregatedCapacity/${hotelID}`, {
+        method: 'GET',
       });
   
-      const data = await response.json();
-  
       if (response.ok) {
+        const data = await response.json();
         setHotels(prevHotels => prevHotels.map(hotel => {
           if (hotel.hotel_id === hotelID) {
             return { ...hotel, aggregatedCapacity: data.aggregatedCapacity };
@@ -46,7 +41,7 @@ function ChooseHotel() {
           return hotel;
         }));
       } else {
-        console.error('Failed to fetch aggregated capacity for hotel', hotelID, ':', data.error);
+        console.error('Failed to fetch aggregated capacity for hotel', hotelID, ':', await response.text());
       }
     } catch (error) {
       console.error('Error fetching aggregated capacity for hotel', hotelID, ':', error);

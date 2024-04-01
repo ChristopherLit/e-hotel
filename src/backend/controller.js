@@ -238,17 +238,26 @@ const get_hotel_cities = (req, res) => {
     });
 };
 
+
 const get_aggregatedCapacity = (req, res) => {
-    const { hotel_id } = req.body;  
+    const hotel_id = parseInt(req.params.hotel_id);
 
     pool.query(get_aggregatedCapacity_query, [hotel_id], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
+
+        // Check if results are empty
+        if (results.rows.length === 0) {
+            // Return 0 as aggregated capacity without throwing an error
+            return res.status(200).json({ aggregatedCapacity: 0 });
+        }
+
         // Return the aggregated capacity
         res.status(200).json({ aggregatedCapacity: results.rows[0].aggregated_capacity });
     });
 };
+
 
 const getTotalRevenue = (req, res) => {
     pool.query(revenue_query, (error, results) => {

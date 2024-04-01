@@ -83,7 +83,7 @@ VALUES
 -- Rooms for hotel chain 1
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
 VALUES
-(200, 5, TRUE, FALSE, FALSE, 1),
+(200, 1, TRUE, FALSE, FALSE, 1),
 (250, 3, TRUE, FALSE, TRUE, 1),
 (150, 2, FALSE, TRUE, FALSE, 1),
 (300, 4, FALSE, TRUE, TRUE, 1),
@@ -102,8 +102,8 @@ VALUES
 INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hotel_id)
 VALUES
 (230, 2, TRUE, FALSE, FALSE, 3),
-(280, 3, TRUE, FALSE, TRUE, 3),
-(180, 5, FALSE, TRUE, FALSE, 3),
+(280, 1, TRUE, FALSE, TRUE, 3),
+(180, 2, FALSE, TRUE, FALSE, 3),
 (330, 4, FALSE, TRUE, TRUE, 3),
 (130, 1, FALSE, FALSE, FALSE, 3);
 
@@ -112,7 +112,7 @@ INSERT INTO room (price, capacity, sea_view, mountain_view, expandable_bed, hote
 VALUES
 (260, 2, TRUE, FALSE, FALSE, 4),
 (310, 3, TRUE, FALSE, TRUE, 4),
-(210, 5, FALSE, TRUE, FALSE, 4),
+(210, 3, FALSE, TRUE, FALSE, 4),
 (360, 4, FALSE, TRUE, TRUE, 4),
 (160, 1, FALSE, FALSE, FALSE, 4);
 
@@ -122,7 +122,7 @@ VALUES
 (260, 2, TRUE, FALSE, FALSE, 5),
 (310, 3, TRUE, FALSE, TRUE, 5),
 (210, 5, FALSE, TRUE, FALSE, 5),
-(360, 4, FALSE, TRUE, TRUE, 5),
+(360, 2, FALSE, TRUE, TRUE, 5),
 (160, 1, FALSE, FALSE, FALSE, 5);
 
 -- ammenities
