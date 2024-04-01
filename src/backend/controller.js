@@ -214,17 +214,19 @@ const create_customer_account = (req, res) => {
     });
 };
 
-const get_revenue = (req, res) => {
-    pool.query(revenue_query, (error, results) => {
+const getTotalRevenue = (req, res) => {
+    const query = 'SELECT SUM(payment) AS total_revenue FROM booking_renting';
+
+    pool.query(query, (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        res.status(200).json(results.rows);
+
+        const totalRevenue = results.rows.length > 0 ? results.rows[0].total_revenue : 0;
+        res.status(200).json({ totalRevenue });
     });
 };
 
-
-
 export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, 
     check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, 
-    get_hotel_count, delete_booking, update_booking, create_customer_account, get_revenue};
+    get_hotel_count, delete_booking, update_booking, create_customer_account, getTotalRevenue};

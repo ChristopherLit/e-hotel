@@ -1,25 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 function SystemInfo() {
   const [totalRevenue, setTotalRevenue] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/revenue")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.length > 0) {
-          setTotalRevenue(data[0].total_revenue);
+    async function getTotalRevenue() {
+      try {
+        const response = await fetch('http://localhost:3000/api/revenue', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        
+          body: JSON.stringify({
+        
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+       
+          console.log('Total revenue:', data.totalrevenue);
+          setTotalRevenue(data.totalRevenue);
         } else {
-          setTotalRevenue(0); // Set to 0 if no data is returned
+          // Handle errors if the request was not successful
+          console.error('Failed to fetch total revenue:', response.statusText);
         }
-      })
-      .catch((error) => console.error("Error:", error));
+      } catch (error) {
+        // Handle fetch errors
+        console.error('Error fetching total revenue:', error);
+      }
+    }
+
+    getTotalRevenue(); // Call the function to fetch total revenue
   }, []);
 
   return (
     <div>
       <h1>System Info</h1>
       <p>Total revenue: {totalRevenue}</p>
+      {/* Display any other system info as needed */}
     </div>
   );
 }
