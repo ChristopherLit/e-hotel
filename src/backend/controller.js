@@ -160,7 +160,6 @@ const get_hotel_count = (req, res) => {
 
 const delete_booking = (req, res) => {
     const booking_renting_id = parseInt(req.params.booking_renting_id);
-    console.log('booking_renting_id:', booking_renting_id);
     pool.query(delete_booking_query, [booking_renting_id], (error, results) => {
         if (error) {
             return res.status(500).json({ error: error.message });
