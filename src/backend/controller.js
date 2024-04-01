@@ -225,8 +225,6 @@ const get_aggregatedCapacity = (req, res) => {
         if (error) {
             return res.status(500).json({ error: error.message });
         }
-        
-        console.log("test: " + results.rows[0].aggregated_capacity);
         // Return the aggregated capacity
         res.status(200).json({ aggregatedCapacity: results.rows[0].aggregated_capacity });
     });
