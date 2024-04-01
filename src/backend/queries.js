@@ -15,9 +15,11 @@ const update_booking_query = `UPDATE booking_renting
 
 const view_rooms_per_area_query = 'SELECT full_address, num_rooms FROM rooms_per_city';
 ;
+// const get_aggregatedCapacity_query = `SELECT * FROM aggregated_capacity_per_hotel`;
+
 const get_aggregatedCapacity_query = `
-SELECT SUM(capacity) AS aggregated_capacity
-FROM room
+SELECT COALESCE(aggregated_capacity, 0) AS aggregated_capacity
+FROM aggregated_capacity_per_hotel
 WHERE hotel_id = $1;
 `;
 
