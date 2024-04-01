@@ -20,7 +20,7 @@ function ChooseHotel() {
     };
 
     fetchHotels();
-  }, [filters]);
+  }, []);
 
   useEffect(() => {
     hotels.forEach(hotel => fetchAggregatedCapacity(hotel.hotel_id));

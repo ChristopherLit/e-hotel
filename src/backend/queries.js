@@ -43,7 +43,7 @@ export { hotel_chain_query,
             update_booking_query,
             view_rooms_per_area_query,
             get_hotel_cities_query,
-            get_aggregatedCapacity_query
+            get_aggregatedCapacity_query,
             create_customer_query,
             revenue_query
 }
