@@ -42,7 +42,7 @@ EXECUTE FUNCTION validate_payment();
 
 -- tests
 INSERT INTO booking_renting (start_date, end_date, payment, credit_card, customer_ssn_sin, hotel_id, room_number)
-VALUES ('2026-04-01', '2026-04-05', -100, 1234567456, 111, 1, 1);
+VALUES ('2027-04-01', '2027-04-05', -100, 12355567456, 111, 1, 1);
 
 UPDATE booking_renting
 SET payment = -50
