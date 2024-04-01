@@ -1,8 +1,7 @@
 import pool from '../../db.js';
 import { hotel_chain_query, hotel_chain_by_id_query, hotel_chain_ids_query, customer_ssn_query, employee_ssn_query, 
-    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query, 
-    delete_booking_query, update_booking_query, create_customer_query, revenue_query } from './queries.js';
-
+    room_query, insert_booking_query, hotel_chain_count_query, hotel_count_query, delete_booking_query, update_booking_query, 
+        view_rooms_per_area_query, get_hotel_cities_query, get_aggregatedCapacity_query, revenue_query } from './queries.js';
 
 const get_hotel_chain = (req, res) => {
     pool.query(hotel_chain_query, (error, results) => {
@@ -194,6 +193,40 @@ const update_booking = (req, res) => {
     });
 };
 
+const get_rooms_per_area = (req, res) => {
+    // Execute the query
+    pool.query(view_rooms_per_area_query, (error, results) => {
+
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+
+        
+        // Return the results from the view
+        res.status(200).json(results.rows);
+    });
+};
+
+const get_hotel_cities = (req, res) => {
+    pool.query(get_hotel_cities_query, (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+     
+        res.status(200).json(results.rows);
+    });
+};
+
+const get_aggregatedCapacity = (req, res) => {
+    const { hotel_id } = req.body;  
+
+    pool.query(get_aggregatedCapacity_query, [hotel_id], (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+        // Return the aggregated capacity
+        res.status(200).json({ aggregatedCapacity: results.rows[0].aggregated_capacity });
+
 const create_customer_account = (req, res) => {
     const { customer_ssn_sin, first_name, last_name } = req.body;
     const currentDate = new Date().toISOString().slice(0, 10);
@@ -225,5 +258,5 @@ const getTotalRevenue = (req, res) => {
 };
 
 export { get_hotel_chain, get_hotel_chain_by_id, get_hotel_by_filters, get_hotel_chain_ids, check_customer_ssn, 
-    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, 
-    get_hotel_count, delete_booking, update_booking, create_customer_account, getTotalRevenue};
+    check_employee_ssn, get_rooms_by_filters, process_payment, get_hotel_chain_count, get_hotel_count, delete_booking, update_booking,
+  get_rooms_per_area, get_hotel_cities, get_aggregatedCapacity, create_customer_account, getTotalRevenue};
